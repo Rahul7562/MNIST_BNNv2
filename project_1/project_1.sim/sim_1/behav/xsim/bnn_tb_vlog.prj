@@ -1,8 +1,5 @@
 # compile verilog/system verilog design source files
 sv xil_defaultlib  --include "../../../../../../../../../../AMDDesignTools/2025.2/Vivado/data/rsb/busdef" \
-"../../../../project_1.srcs/sources_1/new/bnn_layer1.sv" \
-"../../../../project_1.srcs/sources_1/new/bnn_layer2.sv" \
-"../../../../project_1.srcs/sources_1/new/bnn_output.sv" \
 "../../../../project_1.srcs/sources_1/new/bnn_top.sv" \
 "../../../../project_1.srcs/sim_1/new/bnn_tb.sv" \
 

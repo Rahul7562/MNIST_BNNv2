@@ -8,47 +8,66 @@
   **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
   **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
   **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
-  **** Start of session at: Tue Apr 14 20:41:12 2026
+  **** Start of session at: Tue Apr 14 21:02:22 2026
     ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
     ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 
 source bnn_top.tcl -notrace
-create_project: Time (s): cpu = 00:00:11 ; elapsed = 00:00:08 . Memory (MB): peak = 542.629 ; gain = 221.906
+
+*** Running vivado
+    with args -log bnn_top.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source bnn_top.tcl
+
+
+
+****** Vivado v2025.2 (64-bit)
+  **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+  **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+  **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+  **** Start of session at: Tue Apr 14 21:08:26 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source bnn_top.tcl -notrace
+create_project: Time (s): cpu = 00:00:12 ; elapsed = 00:00:08 . Memory (MB): peak = 542.812 ; gain = 223.520
+Command: read_checkpoint -auto_incremental -incremental C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/utils_1/imports/synth_1/bnn_top.dcp
+INFO: [Vivado 12-5825] Read reference checkpoint from C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/utils_1/imports/synth_1/bnn_top.dcp for incremental synthesis
+INFO: [Vivado 12-7989] Please ensure there are no constraint changes
 Command: synth_design -top bnn_top -part xc7z020clg484-1
 Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 228
+INFO: [Synth 8-7075] Helper process launched with PID 14280
 ---------------------------------------------------------------------------------
-Starting Synthesize : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1083.961 ; gain = 538.383
+Starting Synthesize : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1087.504 ; gain = 530.141
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'bnn_top' [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:5]
-INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/weights_l1.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:78]
-INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/thresh_l1.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:79]
-INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/invert_l1.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:80]
-INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/weights_l2.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:82]
-INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/thresh_l2.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:83]
-INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/invert_l2.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:84]
-INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/weights_out.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:86]
-INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/bias_out.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:92]
+INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/input.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:80]
+INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/weights_l1.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:82]
+INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/thresh_l1.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:83]
+INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/invert_l1.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:84]
+INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/weights_l2.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:86]
+INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/thresh_l2.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:87]
+INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/invert_l2.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:88]
+INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/weights_out.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:90]
+INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/bias_out.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:96]
 INFO: [Synth 8-6155] done synthesizing module 'bnn_top' (0#1) [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:5]
-WARNING: [Synth 8-7137] Register class_scores_reg[0] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:206]
-WARNING: [Synth 8-7137] Register class_scores_reg[1] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:206]
-WARNING: [Synth 8-7137] Register class_scores_reg[2] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:206]
-WARNING: [Synth 8-7137] Register class_scores_reg[3] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:206]
-WARNING: [Synth 8-7137] Register class_scores_reg[4] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:206]
-WARNING: [Synth 8-7137] Register class_scores_reg[5] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:206]
-WARNING: [Synth 8-7137] Register class_scores_reg[6] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:206]
-WARNING: [Synth 8-7137] Register class_scores_reg[7] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:206]
-WARNING: [Synth 8-7137] Register class_scores_reg[8] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:206]
-WARNING: [Synth 8-7137] Register class_scores_reg[9] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:206]
+WARNING: [Synth 8-7137] Register class_scores_reg[0] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:211]
+WARNING: [Synth 8-7137] Register class_scores_reg[1] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:211]
+WARNING: [Synth 8-7137] Register class_scores_reg[2] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:211]
+WARNING: [Synth 8-7137] Register class_scores_reg[3] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:211]
+WARNING: [Synth 8-7137] Register class_scores_reg[4] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:211]
+WARNING: [Synth 8-7137] Register class_scores_reg[5] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:211]
+WARNING: [Synth 8-7137] Register class_scores_reg[6] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:211]
+WARNING: [Synth 8-7137] Register class_scores_reg[7] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:211]
+WARNING: [Synth 8-7137] Register class_scores_reg[8] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:211]
+WARNING: [Synth 8-7137] Register class_scores_reg[9] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:211]
 ---------------------------------------------------------------------------------
-Finished Synthesize : Time (s): cpu = 00:00:12 ; elapsed = 00:00:14 . Memory (MB): peak = 1264.809 ; gain = 719.230
+Finished Synthesize : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 1268.254 ; gain = 710.891
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:13 ; elapsed = 00:00:16 . Memory (MB): peak = 1264.809 ; gain = 719.230
+Finished Constraint Validation : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1268.254 ; gain = 710.891
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
@@ -56,11 +75,31 @@ Start Loading Part and Timing Information
 Loading part: xc7z020clg484-1
 ---------------------------------------------------------------------------------
 INFO: [Device 21-403] Loading part xc7z020clg484-1
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:13 ; elapsed = 00:00:16 . Memory (MB): peak = 1264.809 ; gain = 719.230
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1268.254 ; gain = 710.891
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:22 ; elapsed = 00:00:23 . Memory (MB): peak = 1264.809 ; gain = 719.230
+Start Preparing Guide Design
 ---------------------------------------------------------------------------------
+WARNING: [Synth 8-6702] IncrSynth : Design change found in an area of the design that prevents previous synthesis information being used, Reverting to default synthesis
+---------------------------------------------------------------------------------
+Finished Doing Graph Differ : Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 1268.254 ; gain = 710.891
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Preparing Guide Design : Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 1268.254 ; gain = 710.891
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:22 ; elapsed = 00:00:21 . Memory (MB): peak = 1268.254 ; gain = 710.891
+---------------------------------------------------------------------------------
+
+
+Incremental Synthesis Report Summary:
+
+1. Incremental synthesis run: no
+
+   Reason for not running incremental synthesis : Design change found in an area of the design that prevents previous synthesis information being used
+
+
+INFO: [Synth 8-7130] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 No constraint files found.
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -92,8 +131,8 @@ Detailed RTL Component Info :
 	  12 Input  256 Bit        Muxes := 2     
 	  12 Input   32 Bit        Muxes := 2     
 	   2 Input   32 Bit        Muxes := 1     
-	  11 Input   16 Bit        Muxes := 1     
 	   4 Input   16 Bit        Muxes := 4     
+	  11 Input   16 Bit        Muxes := 1     
 	  12 Input   11 Bit        Muxes := 1     
 	  12 Input   10 Bit        Muxes := 1     
 	  12 Input    9 Bit        Muxes := 1     
@@ -101,8 +140,8 @@ Detailed RTL Component Info :
 	  10 Input    8 Bit        Muxes := 2     
 	  10 Input    7 Bit        Muxes := 3     
 	  12 Input    5 Bit        Muxes := 1     
-	  12 Input    4 Bit        Muxes := 3     
 	   2 Input    4 Bit        Muxes := 2     
+	  12 Input    4 Bit        Muxes := 3     
 	   2 Input    1 Bit        Muxes := 12    
 	  12 Input    1 Bit        Muxes := 33    
 	 257 Input    1 Bit        Muxes := 1     
@@ -122,23 +161,109 @@ Finished Part Resource Summary
 ---------------------------------------------------------------------------------
 Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-3886] merging instance 'l2_neuron_idx_reg_rep[0]' (FDCE) to 'l2_neuron_idx_reg[0]'
-INFO: [Synth 8-3886] merging instance 'l2_neuron_idx_reg_rep[1]' (FDCE) to 'l2_neuron_idx_reg[1]'
-INFO: [Synth 8-3886] merging instance 'l2_neuron_idx_reg_rep[2]' (FDCE) to 'l2_neuron_idx_reg[2]'
-INFO: [Synth 8-3886] merging instance 'l2_neuron_idx_reg_rep[3]' (FDCE) to 'l2_neuron_idx_reg[3]'
-INFO: [Synth 8-3886] merging instance 'l2_neuron_idx_reg_rep[4]' (FDCE) to 'l2_neuron_idx_reg[4]'
-INFO: [Synth 8-3886] merging instance 'l2_neuron_idx_reg_rep[5]' (FDCE) to 'l2_neuron_idx_reg[5]'
-INFO: [Synth 8-3886] merging instance 'l2_neuron_idx_reg_rep[6]' (FDCE) to 'l2_neuron_idx_reg[6]'
-INFO: [Synth 8-3886] merging instance 'l2_neuron_idx_reg_rep[7]' (FDCE) to 'l2_neuron_idx_reg[7]'
-INFO: [Synth 8-3886] merging instance 'l1_neuron_idx_reg_rep[0]' (FDCE) to 'l1_neuron_idx_reg[0]'
-INFO: [Synth 8-3886] merging instance 'l1_neuron_idx_reg_rep[1]' (FDCE) to 'l1_neuron_idx_reg[1]'
-INFO: [Synth 8-3886] merging instance 'l1_neuron_idx_reg_rep[2]' (FDCE) to 'l1_neuron_idx_reg[2]'
-INFO: [Synth 8-3886] merging instance 'l1_neuron_idx_reg_rep[3]' (FDCE) to 'l1_neuron_idx_reg[3]'
-INFO: [Synth 8-3886] merging instance 'l1_neuron_idx_reg_rep[4]' (FDCE) to 'l1_neuron_idx_reg[4]'
-INFO: [Synth 8-3886] merging instance 'l1_neuron_idx_reg_rep[5]' (FDCE) to 'l1_neuron_idx_reg[5]'
-INFO: [Synth 8-3886] merging instance 'l1_neuron_idx_reg_rep[6]' (FDCE) to 'l1_neuron_idx_reg[6]'
-INFO: [Synth 8-3886] merging instance 'l1_neuron_idx_reg_rep[7]' (FDCE) to 'l1_neuron_idx_reg[7]'
-INFO: [Synth 8-3886] merging instance 'l1_neuron_idx_reg_rep[8]' (FDCE) to 'l1_neuron_idx_reg[8]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[257]' (FDCE) to 'image_reg_reg[653]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[129]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[193]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[65]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[225]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[97]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[161]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[33]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[241]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[113]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[177]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[49]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[209]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[81]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[145]' (FDCE) to 'image_reg_reg[653]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[17]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[249]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[121]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[185]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[57]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[217]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[89]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[153]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[25]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[233]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[105]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[169]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[41]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[201]' (FDCE) to 'image_reg_reg[653]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[73]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[137]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[9]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[253]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[125]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[189]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[61]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[221]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[93]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[157]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[29]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[237]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[109]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[173]' (FDCE) to 'image_reg_reg[653]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[45]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[205]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[77]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[141]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[13]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[245]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[117]' (FDCE) to 'image_reg_reg[653]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[181]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[53]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[213]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[85]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[149]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[21]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[229]' (FDCE) to 'image_reg_reg[653]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[101]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[165]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[37]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[197]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[69]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[133]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[5]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[255]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[127]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[191]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[63]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[223]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[95]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[159]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[31]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[239]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[111]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[175]' (FDCE) to 'image_reg_reg[653]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[47]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[207]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[79]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[143]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[15]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[247]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[119]' (FDCE) to 'image_reg_reg[653]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[183]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[55]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[215]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[87]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[151]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[23]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[231]' (FDCE) to 'image_reg_reg[653]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[103]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[167]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[39]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[199]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[71]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[135]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[7]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[251]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[123]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[187]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[59]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Common 17-14] Message 'Synth 8-3886' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Common 17-14] Message 'Synth 8-3886' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\image_reg_reg[770] )
 INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
@@ -242,7 +367,7 @@ INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because addr
 INFO: [Common 17-14] Message 'Synth 8-5544' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 INFO: [Common 17-14] Message 'Synth 8-5544' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:02:33 ; elapsed = 00:03:14 . Memory (MB): peak = 1471.688 ; gain = 926.109
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:02:20 ; elapsed = 00:02:59 . Memory (MB): peak = 1487.066 ; gain = 929.703
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -266,13 +391,13 @@ No constraint files found.
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:02:35 ; elapsed = 00:03:17 . Memory (MB): peak = 1496.484 ; gain = 950.906
+Finished Timing Optimization : Time (s): cpu = 00:02:22 ; elapsed = 00:03:01 . Memory (MB): peak = 1511.719 ; gain = 954.355
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:02:37 ; elapsed = 00:03:36 . Memory (MB): peak = 1496.484 ; gain = 950.906
+Finished Technology Mapping : Time (s): cpu = 00:02:24 ; elapsed = 00:03:19 . Memory (MB): peak = 1511.719 ; gain = 954.355
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -290,37 +415,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:02:45 ; elapsed = 00:03:44 . Memory (MB): peak = 1714.395 ; gain = 1168.816
+Finished IO Insertion : Time (s): cpu = 00:02:32 ; elapsed = 00:03:27 . Memory (MB): peak = 1725.758 ; gain = 1168.395
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:02:45 ; elapsed = 00:03:44 . Memory (MB): peak = 1714.395 ; gain = 1168.816
+Finished Renaming Generated Instances : Time (s): cpu = 00:02:32 ; elapsed = 00:03:28 . Memory (MB): peak = 1725.758 ; gain = 1168.395
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:02:45 ; elapsed = 00:03:44 . Memory (MB): peak = 1714.395 ; gain = 1168.816
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:02:33 ; elapsed = 00:03:28 . Memory (MB): peak = 1725.758 ; gain = 1168.395
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:02:45 ; elapsed = 00:03:45 . Memory (MB): peak = 1714.395 ; gain = 1168.816
+Finished Renaming Generated Ports : Time (s): cpu = 00:02:33 ; elapsed = 00:03:28 . Memory (MB): peak = 1725.758 ; gain = 1168.395
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:02:46 ; elapsed = 00:03:46 . Memory (MB): peak = 1714.395 ; gain = 1168.816
+Finished Handling Custom Attributes : Time (s): cpu = 00:02:34 ; elapsed = 00:03:29 . Memory (MB): peak = 1725.758 ; gain = 1168.395
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:02:47 ; elapsed = 00:03:46 . Memory (MB): peak = 1714.395 ; gain = 1168.816
+Finished Renaming Generated Nets : Time (s): cpu = 00:02:34 ; elapsed = 00:03:29 . Memory (MB): peak = 1725.758 ; gain = 1168.395
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -339,16 +464,16 @@ Report Cell Usage:
 |1     |BUFG   |     1|
 |2     |CARRY4 |    23|
 |3     |LUT1   |     4|
-|4     |LUT2   |    43|
-|5     |LUT3   |   152|
-|6     |LUT4   |   159|
-|7     |LUT5   |   505|
-|8     |LUT6   | 11385|
-|9     |MUXF7  |  4931|
-|10    |MUXF8  |   561|
-|11    |FDCE   |  1920|
+|4     |LUT2   |    96|
+|5     |LUT3   |   130|
+|6     |LUT4   |   205|
+|7     |LUT5   |   280|
+|8     |LUT6   | 11099|
+|9     |MUXF7  |  4926|
+|10    |MUXF8  |   302|
+|11    |FDCE   |  1110|
 |12    |FDRE   |   320|
-|13    |IBUF   |   787|
+|13    |IBUF   |     3|
 |14    |OBUF   |     5|
 +------+-------+------+
 
@@ -356,31 +481,31 @@ Report Instance Areas:
 +------+---------+-------+------+
 |      |Instance |Module |Cells |
 +------+---------+-------+------+
-|1     |top      |       | 20796|
+|1     |top      |       | 18504|
 +------+---------+-------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:02:47 ; elapsed = 00:03:46 . Memory (MB): peak = 1714.395 ; gain = 1168.816
+Finished Writing Synthesis Report : Time (s): cpu = 00:02:34 ; elapsed = 00:03:29 . Memory (MB): peak = 1725.758 ; gain = 1168.395
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 0 critical warnings and 10 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:02:47 ; elapsed = 00:03:49 . Memory (MB): peak = 1714.395 ; gain = 1168.816
-Synthesis Optimization Complete : Time (s): cpu = 00:02:47 ; elapsed = 00:03:49 . Memory (MB): peak = 1714.395 ; gain = 1168.816
+Synthesis finished with 0 errors, 0 critical warnings and 11 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:02:34 ; elapsed = 00:03:30 . Memory (MB): peak = 1725.758 ; gain = 1168.395
+Synthesis Optimization Complete : Time (s): cpu = 00:02:34 ; elapsed = 00:03:30 . Memory (MB): peak = 1725.758 ; gain = 1168.395
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.278 . Memory (MB): peak = 1741.156 ; gain = 0.000
-INFO: [Netlist 29-17] Analyzing 5515 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.245 . Memory (MB): peak = 1749.824 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 5251 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 WARNING: [Netlist 29-101] Netlist 'bnn_top' is not ideal for floorplanning, since the cellview 'bnn_top' contains a large number of primitives.  Please consider enabling hierarchy in synthesis if you want to do floorplanning.
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.009 . Memory (MB): peak = 1873.875 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 1882.145 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Synth Design complete | Checksum: 51fa1a5c
+Synth Design complete | Checksum: ec68b45d
 INFO: [Common 17-83] Releasing license: Synthesis
-141 Infos, 11 Warnings, 0 Critical Warnings and 0 Errors encountered.
+231 Infos, 12 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:02:56 ; elapsed = 00:04:01 . Memory (MB): peak = 1873.875 ; gain = 1331.246
-Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.114 . Memory (MB): peak = 1873.875 ; gain = 0.000
+synth_design: Time (s): cpu = 00:02:43 ; elapsed = 00:03:41 . Memory (MB): peak = 1882.145 ; gain = 1333.828
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.091 . Memory (MB): peak = 1882.145 ; gain = 0.000
 INFO: [Common 17-1381] The checkpoint 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.runs/synth_1/bnn_top.dcp' has been generated.
 INFO: [Vivado 12-24828] Executing command : report_utilization -file bnn_top_utilization_synth.rpt -pb bnn_top_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Tue Apr 14 20:45:30 2026...
+INFO: [Common 17-206] Exiting Vivado at Tue Apr 14 21:12:24 2026...

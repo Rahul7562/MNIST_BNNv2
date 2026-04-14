@@ -5,12 +5,12 @@ module bnn_tb;
     logic clk;
     logic rst;
     logic start;
-    logic [783:0] input_digit;
     logic [3:0] predicted_digit;
+    logic done;
     logic pass;
     logic fail;
-
-    reg [783:0] input_mem [0:0];
+    integer cycle_cnt;
+    localparam int MAX_WAIT_CYCLES = 10000000;
 
     localparam logic [3:0] EXPECTED_DIGIT = 4'd5;
 
@@ -18,9 +18,8 @@ module bnn_tb;
         .clk(clk),
         .rst_n(~rst),
         .start(start),
-        .image_in(input_digit),
         .pred_digit(predicted_digit),
-        .done()
+        .done(done)
     );
 
     always #5 clk = ~clk;
@@ -29,12 +28,8 @@ module bnn_tb;
         clk = 1'b0;
         rst = 1'b1;
         start = 1'b0;
-        input_digit = '0;
         pass = 1'b0;
         fail = 1'b0;
-
-        $readmemb("input.mem", input_mem);
-        input_digit = input_mem[0];
 
         @(posedge clk);
         @(posedge clk);
@@ -46,11 +41,17 @@ module bnn_tb;
         @(posedge clk);
         start = 1'b0;
 
-        @(posedge clk);
-        @(posedge clk);
-        @(posedge clk);
-        @(posedge clk);
-        @(posedge clk);
+        // Sequential design now takes many cycles; wait for completion pulse with timeout.
+        cycle_cnt = 0;
+        while ((done == 1'b0) && (cycle_cnt < MAX_WAIT_CYCLES)) begin
+            @(posedge clk);
+            cycle_cnt = cycle_cnt + 1;
+        end
+        if (done == 1'b0) begin
+            fail = 1'b1;
+            $display("FAIL: timeout waiting for done");
+            $finish;
+        end
         @(posedge clk);
 
         $display("Predicted: %0d, Expected: %0d", predicted_digit, EXPECTED_DIGIT);

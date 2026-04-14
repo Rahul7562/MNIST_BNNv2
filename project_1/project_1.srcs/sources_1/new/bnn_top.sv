@@ -32,7 +32,7 @@ module bnn_top (
 
     logic [783:0] image_reg;
     // FIX: removed external 784-bit input bus and replaced it with internal image memory.
-    reg   [783:0] image_mem;
+    reg   [783:0] image_mem [0:0];
     logic [511:0] l1_reg;
     logic [255:0] l2_reg;
     logic [3:0] pred_reg;
@@ -77,7 +77,7 @@ module bnn_top (
 
     initial begin
         // FIX: image is now loaded internally from memory file to reduce top-level IO usage.
-        $readmemb("input.mem", image_mem);
+        $readmemb({`MEM_PATH, "input.mem"}, image_mem);
 
         $readmemb({`MEM_PATH, "weights_l1.mem"}, weights_l1);
         $readmemb({`MEM_PATH, "thresh_l1.mem"},  thresh_l1);
@@ -117,7 +117,7 @@ module bnn_top (
                 IDLE: begin
                     if (start) begin
                         // FIX: consume internal memory image instead of external bus.
-                        image_reg     <= image_mem;
+                        image_reg     <= image_mem[0];
                         l1_reg        <= '0;
                         l2_reg        <= '0;
                         pred_reg      <= '0;
