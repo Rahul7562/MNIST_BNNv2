@@ -1,5 +1,9 @@
 `timescale 1ns/1ps
 
+`ifndef MEM_PATH
+`define MEM_PATH "C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/"
+`endif
+
 module bnn_tb;
 
     logic clk;
@@ -11,9 +15,11 @@ module bnn_tb;
 
     reg [783:0] test_images [0:9];
     reg [783:0] image_word [0:0];
+    bit image_loaded [0:9];
 
     integer pass_count;
     integer fail_count;
+    integer load_fail_count;
     integer i;
 
     bnn_top dut (
@@ -28,24 +34,26 @@ module bnn_tb;
     always #5 clk = ~clk;
 
     task automatic load_image(input int idx);
-        string roots [0:2];
+        string roots [0:3];
         string file_path;
         integer fd;
         int p;
         bit loaded;
         begin
-            roots[0] = "mem_files/";
-            roots[1] = "../mem_files/";
-            roots[2] = "../../mem_files/";
+            roots[0] = `MEM_PATH;
+            roots[1] = "mem_files/";
+            roots[2] = "../mem_files/";
+            roots[3] = "../../mem_files/";
             loaded = 1'b0;
 
-            for (p = 0; p < 3; p = p + 1) begin
+            for (p = 0; p < 4; p = p + 1) begin
                 file_path = $sformatf("%stest_image_%0d.mem", roots[p], idx);
                 fd = $fopen(file_path, "r");
                 if (fd != 0) begin
                     $fclose(fd);
                     $readmemb(file_path, image_word);
                     test_images[idx] = image_word[0];
+                    image_loaded[idx] = 1'b1;
                     loaded = 1'b1;
                     $display("Loaded image %0d from %s", idx, file_path);
                     break;
@@ -53,7 +61,10 @@ module bnn_tb;
             end
 
             if (!loaded) begin
-                $fatal(1, "Could not locate test_image_%0d.mem", idx);
+                image_loaded[idx] = 1'b0;
+                test_images[idx] = '0;
+                load_fail_count = load_fail_count + 1;
+                $error("Could not locate test_image_%0d.mem (tried absolute path and fallbacks)", idx);
             end
         end
     endtask
@@ -63,6 +74,10 @@ module bnn_tb;
         bit got_done;
         logic [3:0] expected_digit_4b;
         begin
+            if (!image_loaded[expected_digit]) begin
+                $error("Image %0d was not loaded, skipping inference", expected_digit);
+                fail_count = fail_count + 1;
+            end else begin
             expected_digit_4b = expected_digit[3:0];
             image_in = test_images[expected_digit];
             start = 1'b1;
@@ -91,6 +106,7 @@ module bnn_tb;
                 end
                 @(posedge clk);
             end
+            end
         end
     endtask
 
@@ -101,9 +117,14 @@ module bnn_tb;
         image_in = '0;
         pass_count = 0;
         fail_count = 0;
+        load_fail_count = 0;
 
         for (i = 0; i < 10; i = i + 1) begin
             load_image(i);
+        end
+
+        if (load_fail_count != 0) begin
+            $warning("%0d test image file(s) failed to load", load_fail_count);
         end
 
         repeat (3) @(posedge clk);

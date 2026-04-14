@@ -1,3 +1,7 @@
+`ifndef MEM_PATH
+`define MEM_PATH "C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/"
+`endif
+
 module bnn_output (
     input  logic [255:0] l2_in,
     output logic [3:0]   pred_digit
@@ -14,13 +18,13 @@ module bnn_output (
     integer j;
 
     initial begin
-        $readmemh("mem_files/weights_out.mem", weights_out_flat);
+        $readmemh({`MEM_PATH, "weights_out.mem"}, weights_out_flat);
         for (k = 0; k < 10; k = k + 1) begin
             for (j = 0; j < 256; j = j + 1) begin
                 weights_out[k][j] = $signed(weights_out_flat[(k * 256) + j]);
             end
         end
-        $readmemh("mem_files/bias_out.mem", bias_out);
+        $readmemh({`MEM_PATH, "bias_out.mem"}, bias_out);
     end
 
     always_comb begin

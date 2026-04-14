@@ -1,3 +1,7 @@
+`ifndef MEM_PATH
+`define MEM_PATH "C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/"
+`endif
+
 module bnn_top (
     input  logic         clk,
     input  logic         rst_n,

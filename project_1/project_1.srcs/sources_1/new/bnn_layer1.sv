@@ -1,3 +1,7 @@
+`ifndef MEM_PATH
+`define MEM_PATH "C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/"
+`endif
+
 module bnn_layer1 (
     input  logic [783:0] image_in,
     output logic [511:0] l1_out
@@ -8,9 +12,9 @@ module bnn_layer1 (
     reg [0:0]   invert_l1  [0:511];
 
     initial begin
-        $readmemb("mem_files/weights_l1.mem", weights_l1);
-        $readmemb("mem_files/thresh_l1.mem",  thresh_l1);
-        $readmemb("mem_files/invert_l1.mem",  invert_l1);
+        $readmemb({`MEM_PATH, "weights_l1.mem"}, weights_l1);
+        $readmemb({`MEM_PATH, "thresh_l1.mem"},  thresh_l1);
+        $readmemb({`MEM_PATH, "invert_l1.mem"},  invert_l1);
     end
 
     genvar j;
