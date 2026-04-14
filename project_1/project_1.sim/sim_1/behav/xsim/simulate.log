@@ -1,0 +1,28 @@
+Time resolution is 1 ps
+Loaded image 0 from C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/test_image_0.mem
+Loaded image 1 from C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/test_image_1.mem
+Loaded image 2 from C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/test_image_2.mem
+Loaded image 3 from C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/test_image_3.mem
+Loaded image 4 from C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/test_image_4.mem
+Loaded image 5 from C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/test_image_5.mem
+Loaded image 6 from C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/test_image_6.mem
+Loaded image 7 from C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/test_image_7.mem
+Loaded image 8 from C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/test_image_8.mem
+Loaded image 9 from C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/test_image_9.mem
+Image 0: Predicted = 0
+Image 1: Predicted = 1
+Image 2: Predicted = 2
+Image 3: Predicted = 3
+Image 4: Predicted = 4
+Image 5: Predicted = 6
+Error: Image 5: Expected 5, got 6
+Time: 325 ns  Iteration: 0  Process: /bnn_tb/run_case  Scope: bnn_tb.run_case  File: C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sim_1/new/bnn_tb.sv Line: 102
+Image 6: Predicted = 6
+Image 7: Predicted = 7
+Image 8: Predicted = 8
+Image 9: Predicted = 9
+BNN summary: pass=9 fail=1
+Fatal: BNN test FAILED with 1 failing cases
+Time: 535 ns  Iteration: 0  Process: /bnn_tb/Initial113_6  Scope: bnn_tb  File: C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sim_1/new/bnn_tb.sv Line: 142
+$finish called at time : 535 ns
+$finish called at time : 535 ns : File "C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sim_1/new/bnn_tb.sv" Line 145
