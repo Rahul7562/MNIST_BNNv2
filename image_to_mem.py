@@ -25,9 +25,28 @@ def resolve_mem_dir() -> Path:
 
 def convert_image_to_bits(image_path: Path) -> str:
     img = Image.open(image_path).convert("L")
-    img = img.resize((IMG_SIZE, IMG_SIZE), Image.Resampling.LANCZOS)
     arr = np.asarray(img, dtype=np.uint8)
-    binary = (arr < THRESHOLD).astype(np.uint8)
+
+    border = np.concatenate([arr[0, :], arr[-1, :], arr[:, 0], arr[:, -1]])
+    if float(border.mean()) < 127.0:
+        arr = 255 - arr
+
+    fg = arr < THRESHOLD
+    ys, xs = np.where(fg)
+    if xs.size > 0 and ys.size > 0:
+        arr = arr[ys.min() : ys.max() + 1, xs.min() : xs.max() + 1]
+
+    # Match MNIST-like placement: fit digit in 20x20 then center in 28x28.
+    digit = Image.fromarray(arr)
+    digit.thumbnail((20, 20), Image.Resampling.LANCZOS)
+
+    canvas = Image.new("L", (IMG_SIZE, IMG_SIZE), 255)
+    ox = (IMG_SIZE - digit.width) // 2
+    oy = (IMG_SIZE - digit.height) // 2
+    canvas.paste(digit, (ox, oy))
+
+    arr28 = np.asarray(canvas, dtype=np.uint8)
+    binary = (arr28 < THRESHOLD).astype(np.uint8)
     return "".join("1" if v else "0" for v in binary.reshape(-1))
 
 
