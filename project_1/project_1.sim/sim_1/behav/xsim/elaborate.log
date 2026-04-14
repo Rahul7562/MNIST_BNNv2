@@ -8,17 +8,4 @@ Pass Through NonSizing Optimizer
 WARNING: [VRFC 10-3818] variable 'k' is driven by invalid combination of procedural drivers [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_output.sv:17]
 WARNING: [VRFC 10-2921] 'k' driven by this always_comb block should not be driven by any other process [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_output.sv:30]
 Completed static elaboration
-Starting simulation data flow analysis
-WARNING: [XSIM 43-4099] "C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv" Line 5. Module bnn_top doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_layer1.sv" Line 5. Module bnn_layer1 doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_layer2.sv" Line 5. Module bnn_layer2 doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_output.sv" Line 5. Module bnn_output doesn't have a timescale but at least one module in design has a timescale.
-Completed simulation data flow analysis
-Time Resolution for simulation is 1ps
-Compiling module xil_defaultlib.bnn_layer1
-Compiling module xil_defaultlib.bnn_layer2
-Compiling module xil_defaultlib.bnn_output
-Compiling module xil_defaultlib.bnn_top
-Compiling module xil_defaultlib.bnn_tb
-Compiling module xil_defaultlib.glbl
-Built simulation snapshot bnn_tb_behav
+INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel

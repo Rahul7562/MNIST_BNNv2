@@ -1,4 +1,4 @@
 Time resolution is 1 ps
-Predicted: 3, Expected: 4
+Predicted: 0, Expected: 4
 FAIL
 $finish called at time : 105 ns : File "C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sim_1/new/bnn_tb.sv" Line 65
