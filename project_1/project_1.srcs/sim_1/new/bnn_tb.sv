@@ -12,7 +12,7 @@ module bnn_tb;
 
     reg [783:0] input_mem [0:0];
 
-    localparam logic [3:0] EXPECTED_DIGIT = 4'd4;
+    localparam logic [3:0] EXPECTED_DIGIT = 4'd5;
 
     bnn_top dut (
         .clk(clk),
