@@ -3,8 +3,8 @@
 # SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
 # IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
 # SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
-# Start of session at: Tue Apr 14 14:17:16 2026
-# Process ID         : 2432
+# Start of session at: Tue Apr 14 20:41:12 2026
+# Process ID         : 11260
 # Current directory  : C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.runs/synth_1
 # Command line       : vivado.exe -log bnn_top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source bnn_top.tcl
 # Log file           : C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.runs/synth_1/bnn_top.vds
@@ -12,40 +12,385 @@
 # Running On         : system
 # Platform           : Windows Server 2016 or Windows 10
 # Operating System   : 26200
-# Processor Detail   : AMD EPYC 7763 64-Core Processor                
-# CPU Frequency      : 2445 MHz
+# Processor Detail   : AMD EPYC 7452 32-Core Processor                
+# CPU Frequency      : 2346 MHz
 # CPU Physical cores : 2
 # CPU Logical cores  : 4
-# Host memory        : 17126 MB
+# Host memory        : 17121 MB
 # Swap memory        : 3087 MB
-# Total Virtual      : 20213 MB
-# Available Virtual  : 9469 MB
+# Total Virtual      : 20208 MB
+# Available Virtual  : 7582 MB
 #-----------------------------------------------------------
 source bnn_top.tcl -notrace
-create_project: Time (s): cpu = 00:00:10 ; elapsed = 00:00:08 . Memory (MB): peak = 541.750 ; gain = 218.477
+create_project: Time (s): cpu = 00:00:11 ; elapsed = 00:00:08 . Memory (MB): peak = 542.629 ; gain = 221.906
 Command: synth_design -top bnn_top -part xc7z020clg484-1
 Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 11436
+INFO: [Synth 8-7075] Helper process launched with PID 228
 ---------------------------------------------------------------------------------
-Starting Synthesize : Time (s): cpu = 00:00:06 ; elapsed = 00:00:09 . Memory (MB): peak = 1081.160 ; gain = 535.457
+Starting Synthesize : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1083.961 ; gain = 538.383
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'bnn_top' [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:5]
-INFO: [Synth 8-6157] synthesizing module 'bnn_layer1' [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_layer1.sv:5]
-INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/weights_l1.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_layer1.sv:15]
-INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/thresh_l1.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_layer1.sv:16]
-INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/invert_l1.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_layer1.sv:17]
-INFO: [Synth 8-6155] done synthesizing module 'bnn_layer1' (0#1) [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_layer1.sv:5]
-INFO: [Synth 8-6157] synthesizing module 'bnn_layer2' [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_layer2.sv:5]
-INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/weights_l2.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_layer2.sv:15]
-INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/thresh_l2.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_layer2.sv:16]
-INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/invert_l2.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_layer2.sv:17]
-INFO: [Synth 8-6155] done synthesizing module 'bnn_layer2' (0#1) [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_layer2.sv:5]
-INFO: [Synth 8-6157] synthesizing module 'bnn_output' [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_output.sv:5]
-INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/weights_out.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_output.sv:21]
-INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/bias_out.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_output.sv:27]
-INFO: [Synth 8-6155] done synthesizing module 'bnn_output' (0#1) [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_output.sv:5]
+INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/weights_l1.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:78]
+INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/thresh_l1.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:79]
+INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/invert_l1.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:80]
+INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/weights_l2.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:82]
+INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/thresh_l2.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:83]
+INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/invert_l2.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:84]
+INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/weights_out.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:86]
+INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/bias_out.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:92]
 INFO: [Synth 8-6155] done synthesizing module 'bnn_top' (0#1) [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:5]
+WARNING: [Synth 8-7137] Register class_scores_reg[0] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:206]
+WARNING: [Synth 8-7137] Register class_scores_reg[1] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:206]
+WARNING: [Synth 8-7137] Register class_scores_reg[2] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:206]
+WARNING: [Synth 8-7137] Register class_scores_reg[3] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:206]
+WARNING: [Synth 8-7137] Register class_scores_reg[4] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:206]
+WARNING: [Synth 8-7137] Register class_scores_reg[5] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:206]
+WARNING: [Synth 8-7137] Register class_scores_reg[6] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:206]
+WARNING: [Synth 8-7137] Register class_scores_reg[7] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:206]
+WARNING: [Synth 8-7137] Register class_scores_reg[8] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:206]
+WARNING: [Synth 8-7137] Register class_scores_reg[9] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:206]
+---------------------------------------------------------------------------------
+Finished Synthesize : Time (s): cpu = 00:00:12 ; elapsed = 00:00:14 . Memory (MB): peak = 1264.809 ; gain = 719.230
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:13 ; elapsed = 00:00:16 . Memory (MB): peak = 1264.809 ; gain = 719.230
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z020clg484-1
+---------------------------------------------------------------------------------
+INFO: [Device 21-403] Loading part xc7z020clg484-1
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:13 ; elapsed = 00:00:16 . Memory (MB): peak = 1264.809 ; gain = 719.230
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:22 ; elapsed = 00:00:23 . Memory (MB): peak = 1264.809 ; gain = 719.230
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   3 Input   32 Bit       Adders := 1     
+	   2 Input   11 Bit       Adders := 1     
+	   2 Input   10 Bit       Adders := 1     
+	   2 Input    9 Bit       Adders := 1     
+	   2 Input    8 Bit       Adders := 2     
+	  14 Input    5 Bit       Adders := 1     
+	   2 Input    4 Bit       Adders := 1     
+	   3 Input    2 Bit       Adders := 2     
++---XORs : 
+	   2 Input     16 Bit         XORs := 2     
++---Registers : 
+	              784 Bit    Registers := 1     
+	              512 Bit    Registers := 1     
+	              256 Bit    Registers := 1     
+	               32 Bit    Registers := 12    
+	               11 Bit    Registers := 1     
+	               10 Bit    Registers := 1     
+	                9 Bit    Registers := 2     
+	                8 Bit    Registers := 3     
+	                4 Bit    Registers := 3     
++---Muxes : 
+	  12 Input  512 Bit        Muxes := 2     
+	  12 Input  256 Bit        Muxes := 2     
+	  12 Input   32 Bit        Muxes := 2     
+	   2 Input   32 Bit        Muxes := 1     
+	  11 Input   16 Bit        Muxes := 1     
+	   4 Input   16 Bit        Muxes := 4     
+	  12 Input   11 Bit        Muxes := 1     
+	  12 Input   10 Bit        Muxes := 1     
+	  12 Input    9 Bit        Muxes := 1     
+	  12 Input    8 Bit        Muxes := 2     
+	  10 Input    8 Bit        Muxes := 2     
+	  10 Input    7 Bit        Muxes := 3     
+	  12 Input    5 Bit        Muxes := 1     
+	  12 Input    4 Bit        Muxes := 3     
+	   2 Input    4 Bit        Muxes := 2     
+	   2 Input    1 Bit        Muxes := 12    
+	  12 Input    1 Bit        Muxes := 33    
+	 257 Input    1 Bit        Muxes := 1     
+	 513 Input    1 Bit        Muxes := 1     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 220 (col length:60)
+BRAMs: 280 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+INFO: [Synth 8-3886] merging instance 'l2_neuron_idx_reg_rep[0]' (FDCE) to 'l2_neuron_idx_reg[0]'
+INFO: [Synth 8-3886] merging instance 'l2_neuron_idx_reg_rep[1]' (FDCE) to 'l2_neuron_idx_reg[1]'
+INFO: [Synth 8-3886] merging instance 'l2_neuron_idx_reg_rep[2]' (FDCE) to 'l2_neuron_idx_reg[2]'
+INFO: [Synth 8-3886] merging instance 'l2_neuron_idx_reg_rep[3]' (FDCE) to 'l2_neuron_idx_reg[3]'
+INFO: [Synth 8-3886] merging instance 'l2_neuron_idx_reg_rep[4]' (FDCE) to 'l2_neuron_idx_reg[4]'
+INFO: [Synth 8-3886] merging instance 'l2_neuron_idx_reg_rep[5]' (FDCE) to 'l2_neuron_idx_reg[5]'
+INFO: [Synth 8-3886] merging instance 'l2_neuron_idx_reg_rep[6]' (FDCE) to 'l2_neuron_idx_reg[6]'
+INFO: [Synth 8-3886] merging instance 'l2_neuron_idx_reg_rep[7]' (FDCE) to 'l2_neuron_idx_reg[7]'
+INFO: [Synth 8-3886] merging instance 'l1_neuron_idx_reg_rep[0]' (FDCE) to 'l1_neuron_idx_reg[0]'
+INFO: [Synth 8-3886] merging instance 'l1_neuron_idx_reg_rep[1]' (FDCE) to 'l1_neuron_idx_reg[1]'
+INFO: [Synth 8-3886] merging instance 'l1_neuron_idx_reg_rep[2]' (FDCE) to 'l1_neuron_idx_reg[2]'
+INFO: [Synth 8-3886] merging instance 'l1_neuron_idx_reg_rep[3]' (FDCE) to 'l1_neuron_idx_reg[3]'
+INFO: [Synth 8-3886] merging instance 'l1_neuron_idx_reg_rep[4]' (FDCE) to 'l1_neuron_idx_reg[4]'
+INFO: [Synth 8-3886] merging instance 'l1_neuron_idx_reg_rep[5]' (FDCE) to 'l1_neuron_idx_reg[5]'
+INFO: [Synth 8-3886] merging instance 'l1_neuron_idx_reg_rep[6]' (FDCE) to 'l1_neuron_idx_reg[6]'
+INFO: [Synth 8-3886] merging instance 'l1_neuron_idx_reg_rep[7]' (FDCE) to 'l1_neuron_idx_reg[7]'
+INFO: [Synth 8-3886] merging instance 'l1_neuron_idx_reg_rep[8]' (FDCE) to 'l1_neuron_idx_reg[8]'
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Common 17-14] Message 'Synth 8-5544' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Common 17-14] Message 'Synth 8-5544' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:02:33 ; elapsed = 00:03:14 . Memory (MB): peak = 1471.688 ; gain = 926.109
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+ROM: Preliminary Mapping Report
++------------+------------+---------------+----------------+
+|Module Name | RTL Object | Depth x Width | Implemented As | 
++------------+------------+---------------+----------------+
+|bnn_top     | thresh_l2  | 256x7         | LUT            | 
+|bnn_top     | weights_l2 | 256x512       | LUT            | 
+|bnn_top     | thresh_l1  | 512x10        | LUT            | 
+|bnn_top     | weights_l1 | 512x784       | LUT            | 
++------------+------------+---------------+----------------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:02:35 ; elapsed = 00:03:17 . Memory (MB): peak = 1496.484 ; gain = 950.906
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:02:37 ; elapsed = 00:03:36 . Memory (MB): peak = 1496.484 ; gain = 950.906
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:02:45 ; elapsed = 00:03:44 . Memory (MB): peak = 1714.395 ; gain = 1168.816
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:02:45 ; elapsed = 00:03:44 . Memory (MB): peak = 1714.395 ; gain = 1168.816
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:02:45 ; elapsed = 00:03:44 . Memory (MB): peak = 1714.395 ; gain = 1168.816
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:02:45 ; elapsed = 00:03:45 . Memory (MB): peak = 1714.395 ; gain = 1168.816
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:02:46 ; elapsed = 00:03:46 . Memory (MB): peak = 1714.395 ; gain = 1168.816
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:02:47 ; elapsed = 00:03:46 . Memory (MB): peak = 1714.395 ; gain = 1168.816
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |BUFG   |     1|
+|2     |CARRY4 |    23|
+|3     |LUT1   |     4|
+|4     |LUT2   |    43|
+|5     |LUT3   |   152|
+|6     |LUT4   |   159|
+|7     |LUT5   |   505|
+|8     |LUT6   | 11385|
+|9     |MUXF7  |  4931|
+|10    |MUXF8  |   561|
+|11    |FDCE   |  1920|
+|12    |FDRE   |   320|
+|13    |IBUF   |   787|
+|14    |OBUF   |     5|
++------+-------+------+
+
+Report Instance Areas: 
++------+---------+-------+------+
+|      |Instance |Module |Cells |
++------+---------+-------+------+
+|1     |top      |       | 20796|
++------+---------+-------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:02:47 ; elapsed = 00:03:46 . Memory (MB): peak = 1714.395 ; gain = 1168.816
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 10 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:02:47 ; elapsed = 00:03:49 . Memory (MB): peak = 1714.395 ; gain = 1168.816
+Synthesis Optimization Complete : Time (s): cpu = 00:02:47 ; elapsed = 00:03:49 . Memory (MB): peak = 1714.395 ; gain = 1168.816
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.278 . Memory (MB): peak = 1741.156 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 5515 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+WARNING: [Netlist 29-101] Netlist 'bnn_top' is not ideal for floorplanning, since the cellview 'bnn_top' contains a large number of primitives.  Please consider enabling hierarchy in synthesis if you want to do floorplanning.
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.009 . Memory (MB): peak = 1873.875 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: 51fa1a5c
+INFO: [Common 17-83] Releasing license: Synthesis
+141 Infos, 11 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:02:56 ; elapsed = 00:04:01 . Memory (MB): peak = 1873.875 ; gain = 1331.246
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.114 . Memory (MB): peak = 1873.875 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.runs/synth_1/bnn_top.dcp' has been generated.
+INFO: [Vivado 12-24828] Executing command : report_utilization -file bnn_top_utilization_synth.rpt -pb bnn_top_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Tue Apr 14 20:45:30 2026...
