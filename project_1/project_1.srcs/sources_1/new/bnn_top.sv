@@ -3,11 +3,11 @@
 `endif
 
 module bnn_top (
-    input  logic         clk,
-    input  logic         rst_n,
-    input  logic         start,
-    output logic [3:0]   pred_digit,
-    output logic         done
+    input clk,                     // FIX: minimal external IO for FPGA top-level.
+    input rst,                     // FIX: active-high reset input for board button mapping.
+    input start,
+    output [3:0] led,              // FIX: expose 4-bit prediction on LEDs.
+    output done
 );
 
     localparam int CHUNK_BITS  = 16;
@@ -16,8 +16,12 @@ module bnn_top (
 
     typedef enum logic [3:0] {
         IDLE,
+        L1_FETCH,   // FIX: register L1 chunk operands before popcount.
+        L1_POP,     // FIX: register L1 popcount in dedicated stage.
         L1_ACCUM,
         L1_WRITE,
+        L2_FETCH,   // FIX: register L2 chunk operands before popcount.
+        L2_POP,     // FIX: register L2 popcount in dedicated stage.
         L2_ACCUM,
         L2_WRITE,
         OUT_CLASS_INIT,
@@ -36,6 +40,7 @@ module bnn_top (
     logic [511:0] l1_reg;
     logic [255:0] l2_reg;
     logic [3:0] pred_reg;
+    logic [3:0] pred_digit; // FIX: internal prediction bus mapped to LED outputs.
 
     // Model memories kept in top and accessed by index to avoid massive parallel logic.
     reg [783:0] weights_l1 [0:511];
@@ -56,6 +61,17 @@ module bnn_top (
     logic [3:0] class_idx;
     logic [7:0] feat_idx;
     logic [10:0] pop_acc;
+
+    // FIX: staged registers to break RAM->popcount->accumulator critical path.
+    logic [CHUNK_BITS-1:0] l1_img_chunk_reg;
+    logic [CHUNK_BITS-1:0] l1_w_chunk_reg;
+    logic [4:0]            l1_pop_reg;
+    logic                  l1_last_chunk_reg;
+
+    logic [CHUNK_BITS-1:0] l2_feat_chunk_reg;
+    logic [CHUNK_BITS-1:0] l2_w_chunk_reg;
+    logic [4:0]            l2_pop_reg;
+    logic                  l2_last_chunk_reg;
 
     logic signed [31:0] out_acc;
     logic signed [31:0] class_scores [0:9];
@@ -96,8 +112,8 @@ module bnn_top (
         $readmemh({`MEM_PATH, "bias_out.mem"}, bias_out);
     end
 
-    always_ff @(posedge clk or negedge rst_n) begin
-        if (!rst_n) begin
+    always_ff @(posedge clk) begin // FIX: use synchronous reset style for FPGA-friendly timing.
+        if (rst) begin
             state          <= IDLE;
             image_reg      <= '0;
             l1_reg         <= '0;
@@ -109,6 +125,14 @@ module bnn_top (
             class_idx      <= '0;
             feat_idx       <= '0;
             pop_acc        <= '0;
+            l1_img_chunk_reg  <= '0;
+            l1_w_chunk_reg    <= '0;
+            l1_pop_reg        <= '0;
+            l1_last_chunk_reg <= 1'b0;
+            l2_feat_chunk_reg  <= '0;
+            l2_w_chunk_reg     <= '0;
+            l2_pop_reg         <= '0;
+            l2_last_chunk_reg  <= 1'b0;
             out_acc        <= '0;
             best_val       <= '0;
             best_idx       <= '0;
@@ -124,20 +148,33 @@ module bnn_top (
                         l1_neuron_idx <= 9'd0;
                         bit_idx       <= 10'd0;
                         pop_acc       <= 11'd0;
-                        state         <= L1_ACCUM;
+                        state         <= L1_FETCH;
                     end
                 end
 
-                // Stage 1/2/3: XNOR chunk, local popcount, and running accumulation.
-                L1_ACCUM: begin
-                    pop_acc <= pop_acc + popcount16(
-                        ~(image_reg[bit_idx +: CHUNK_BITS] ^ weights_l1[l1_neuron_idx][bit_idx +: CHUNK_BITS])
-                    );
+                // FIX: Stage 1 - register operand chunks from memory/source vector.
+                L1_FETCH: begin
+                    l1_img_chunk_reg  <= image_reg[bit_idx +: CHUNK_BITS];
+                    l1_w_chunk_reg    <= weights_l1[l1_neuron_idx][bit_idx +: CHUNK_BITS];
+                    l1_last_chunk_reg <= (bit_idx == L1_LAST_BIT[9:0]);
+                    state <= L1_POP;
+                end
 
-                    if (bit_idx == L1_LAST_BIT[9:0]) begin
+                // FIX: Stage 2 - popcount from registered XNOR chunk.
+                L1_POP: begin
+                    l1_pop_reg <= popcount16(~(l1_img_chunk_reg ^ l1_w_chunk_reg));
+                    state <= L1_ACCUM;
+                end
+
+                // FIX: Stage 3 - accumulate registered popcount.
+                L1_ACCUM: begin
+                    pop_acc <= pop_acc + l1_pop_reg;
+
+                    if (l1_last_chunk_reg) begin
                         state <= L1_WRITE;
                     end else begin
                         bit_idx <= bit_idx + CHUNK_BITS;
+                        state <= L1_FETCH;
                     end
                 end
 
@@ -150,24 +187,37 @@ module bnn_top (
                         l2_neuron_idx <= 8'd0;
                         bit_idx       <= 10'd0;
                         pop_acc       <= 11'd0;
-                        state         <= L2_ACCUM;
+                        state         <= L2_FETCH;
                     end else begin
                         l1_neuron_idx <= l1_neuron_idx + 9'd1;
                         bit_idx       <= 10'd0;
                         pop_acc       <= 11'd0;
-                        state         <= L1_ACCUM;
+                        state         <= L1_FETCH;
                     end
                 end
 
-                L2_ACCUM: begin
-                    pop_acc <= pop_acc + popcount16(
-                        ~(l1_reg[bit_idx +: CHUNK_BITS] ^ weights_l2[l2_neuron_idx][bit_idx +: CHUNK_BITS])
-                    );
+                // FIX: Stage 1 - register operand chunks from memory/source vector.
+                L2_FETCH: begin
+                    l2_feat_chunk_reg  <= l1_reg[bit_idx +: CHUNK_BITS];
+                    l2_w_chunk_reg     <= weights_l2[l2_neuron_idx][bit_idx +: CHUNK_BITS];
+                    l2_last_chunk_reg  <= (bit_idx == L2_LAST_BIT[9:0]);
+                    state <= L2_POP;
+                end
 
-                    if (bit_idx == L2_LAST_BIT[9:0]) begin
+                // FIX: Stage 2 - popcount from registered XNOR chunk.
+                L2_POP: begin
+                    l2_pop_reg <= popcount16(~(l2_feat_chunk_reg ^ l2_w_chunk_reg));
+                    state <= L2_ACCUM;
+                end
+
+                L2_ACCUM: begin
+                    pop_acc <= pop_acc + l2_pop_reg;
+
+                    if (l2_last_chunk_reg) begin
                         state <= L2_WRITE;
                     end else begin
                         bit_idx <= bit_idx + CHUNK_BITS;
+                        state <= L2_FETCH;
                     end
                 end
 
@@ -182,7 +232,7 @@ module bnn_top (
                         l2_neuron_idx <= l2_neuron_idx + 8'd1;
                         bit_idx <= 10'd0;
                         pop_acc <= 11'd0;
-                        state <= L2_ACCUM;
+                        state <= L2_FETCH;
                     end
                 end
 
@@ -255,6 +305,7 @@ module bnn_top (
     end
 
     assign pred_digit = pred_reg;
+    assign led = pred_digit; // FIX: map predicted digit directly to LED outputs.
     assign done = (state == DONE);
 
 endmodule

@@ -121,6 +121,7 @@ OPTRACE "set parameters" END { }
 OPTRACE "add files" START { }
   add_files -quiet C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.runs/synth_1/bnn_top.dcp
 OPTRACE "read constraints: implementation" START { }
+  read_xdc C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/constrs_1/new/zedboard_minimal.xdc
 OPTRACE "read constraints: implementation" END { }
 OPTRACE "read constraints: implementation_pre" START { }
 OPTRACE "read constraints: implementation_pre" END { }

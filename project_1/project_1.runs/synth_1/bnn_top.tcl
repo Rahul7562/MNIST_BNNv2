@@ -57,7 +57,6 @@ if {$::dispatch::connected} {
 
 OPTRACE "synth_1" START { ROLLUP_AUTO }
 set_param general.usePosixSpawnForFork 1
-set_param chipscope.maxJobs 1
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7z020clg484-1
 
@@ -82,6 +81,9 @@ OPTRACE "Adding files" END { }
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
+read_xdc C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/constrs_1/new/zedboard_minimal.xdc
+set_property used_in_implementation false [get_files C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/constrs_1/new/zedboard_minimal.xdc]
+
 set_param ips.enableIPCacheLiteLoad 1
 
 read_checkpoint -auto_incremental -incremental C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/utils_1/imports/synth_1/bnn_top.dcp

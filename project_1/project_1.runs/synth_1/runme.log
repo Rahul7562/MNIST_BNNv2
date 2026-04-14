@@ -8,27 +8,12 @@
   **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
   **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
   **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
-  **** Start of session at: Tue Apr 14 21:02:22 2026
+  **** Start of session at: Wed Apr 15 00:39:19 2026
     ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
     ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 
 source bnn_top.tcl -notrace
-
-*** Running vivado
-    with args -log bnn_top.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source bnn_top.tcl
-
-
-
-****** Vivado v2025.2 (64-bit)
-  **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
-  **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
-  **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
-  **** Start of session at: Tue Apr 14 21:08:26 2026
-    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
-    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
-
-source bnn_top.tcl -notrace
-create_project: Time (s): cpu = 00:00:12 ; elapsed = 00:00:08 . Memory (MB): peak = 542.812 ; gain = 223.520
+create_project: Time (s): cpu = 00:00:14 ; elapsed = 00:00:10 . Memory (MB): peak = 542.137 ; gain = 222.695
 Command: read_checkpoint -auto_incremental -incremental C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/utils_1/imports/synth_1/bnn_top.dcp
 INFO: [Vivado 12-5825] Read reference checkpoint from C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/utils_1/imports/synth_1/bnn_top.dcp for incremental synthesis
 INFO: [Vivado 12-7989] Please ensure there are no constraint changes
@@ -36,71 +21,75 @@ Command: synth_design -top bnn_top -part xc7z020clg484-1
 Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Device 21-403] Loading part xc7z020clg484-1
+INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 14280
+INFO: [Synth 8-7075] Helper process launched with PID 5328
 ---------------------------------------------------------------------------------
-Starting Synthesize : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1087.504 ; gain = 530.141
+Starting RTL Elaboration : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1321.797 ; gain = 541.520
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'bnn_top' [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:5]
-INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/input.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:80]
-INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/weights_l1.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:82]
-INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/thresh_l1.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:83]
-INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/invert_l1.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:84]
-INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/weights_l2.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:86]
-INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/thresh_l2.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:87]
-INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/invert_l2.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:88]
-INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/weights_out.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:90]
-INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/bias_out.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:96]
+INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/input.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:96]
+INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/weights_l1.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:98]
+INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/thresh_l1.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:99]
+INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/invert_l1.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:100]
+INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/weights_l2.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:102]
+INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/thresh_l2.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:103]
+INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/invert_l2.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:104]
+INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/weights_out.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:106]
+INFO: [Synth 8-3876] $readmem data file 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/bias_out.mem' is read successfully [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:112]
 INFO: [Synth 8-6155] done synthesizing module 'bnn_top' (0#1) [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:5]
-WARNING: [Synth 8-7137] Register class_scores_reg[0] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:211]
-WARNING: [Synth 8-7137] Register class_scores_reg[1] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:211]
-WARNING: [Synth 8-7137] Register class_scores_reg[2] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:211]
-WARNING: [Synth 8-7137] Register class_scores_reg[3] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:211]
-WARNING: [Synth 8-7137] Register class_scores_reg[4] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:211]
-WARNING: [Synth 8-7137] Register class_scores_reg[5] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:211]
-WARNING: [Synth 8-7137] Register class_scores_reg[6] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:211]
-WARNING: [Synth 8-7137] Register class_scores_reg[7] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:211]
-WARNING: [Synth 8-7137] Register class_scores_reg[8] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:211]
-WARNING: [Synth 8-7137] Register class_scores_reg[9] in module bnn_top has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:211]
 ---------------------------------------------------------------------------------
-Finished Synthesize : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 1268.254 ; gain = 710.891
+Finished RTL Elaboration : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 1503.684 ; gain = 723.406
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1268.254 ; gain = 710.891
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1503.684 ; gain = 723.406
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1503.684 ; gain = 723.406
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.135 . Memory (MB): peak = 1503.684 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/constrs_1/new/zedboard_minimal.xdc]
+Finished Parsing XDC File [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/constrs_1/new/zedboard_minimal.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/constrs_1/new/zedboard_minimal.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/bnn_top_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/bnn_top_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1562.453 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.066 . Memory (MB): peak = 1562.453 ; gain = 0.000
+INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 1562.453 ; gain = 782.176
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7z020clg484-1
 ---------------------------------------------------------------------------------
-INFO: [Device 21-403] Loading part xc7z020clg484-1
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1268.254 ; gain = 710.891
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 1562.453 ; gain = 782.176
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Start Preparing Guide Design
----------------------------------------------------------------------------------
-WARNING: [Synth 8-6702] IncrSynth : Design change found in an area of the design that prevents previous synthesis information being used, Reverting to default synthesis
----------------------------------------------------------------------------------
-Finished Doing Graph Differ : Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 1268.254 ; gain = 710.891
+Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Preparing Guide Design : Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 1268.254 ; gain = 710.891
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:27 ; elapsed = 00:00:27 . Memory (MB): peak = 1562.453 ; gain = 782.176
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:22 ; elapsed = 00:00:21 . Memory (MB): peak = 1268.254 ; gain = 710.891
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:33 ; elapsed = 00:00:35 . Memory (MB): peak = 1562.453 ; gain = 782.176
 ---------------------------------------------------------------------------------
-
-
-Incremental Synthesis Report Summary:
-
-1. Incremental synthesis run: no
-
-   Reason for not running incremental synthesis : Design change found in an area of the design that prevents previous synthesis information being used
-
-
-INFO: [Synth 8-7130] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
-No constraint files found.
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
 ---------------------------------------------------------------------------------
@@ -111,9 +100,8 @@ Detailed RTL Component Info :
 	   2 Input   10 Bit       Adders := 1     
 	   2 Input    9 Bit       Adders := 1     
 	   2 Input    8 Bit       Adders := 2     
-	  14 Input    5 Bit       Adders := 1     
+	  16 Input    5 Bit       Adders := 2     
 	   2 Input    4 Bit       Adders := 1     
-	   3 Input    2 Bit       Adders := 2     
 +---XORs : 
 	   2 Input     16 Bit         XORs := 2     
 +---Registers : 
@@ -121,31 +109,37 @@ Detailed RTL Component Info :
 	              512 Bit    Registers := 1     
 	              256 Bit    Registers := 1     
 	               32 Bit    Registers := 12    
+	               16 Bit    Registers := 4     
 	               11 Bit    Registers := 1     
 	               10 Bit    Registers := 1     
 	                9 Bit    Registers := 2     
 	                8 Bit    Registers := 3     
+	                5 Bit    Registers := 2     
 	                4 Bit    Registers := 3     
+	                1 Bit    Registers := 2     
++---ROMs : 
+	                    ROMs := 4     
 +---Muxes : 
-	  12 Input  512 Bit        Muxes := 2     
-	  12 Input  256 Bit        Muxes := 2     
-	  12 Input   32 Bit        Muxes := 2     
+	  16 Input  512 Bit        Muxes := 2     
+	  16 Input  256 Bit        Muxes := 2     
 	   2 Input   32 Bit        Muxes := 1     
-	   4 Input   16 Bit        Muxes := 4     
+	  16 Input   32 Bit        Muxes := 2     
 	  11 Input   16 Bit        Muxes := 1     
-	  12 Input   11 Bit        Muxes := 1     
-	  12 Input   10 Bit        Muxes := 1     
-	  12 Input    9 Bit        Muxes := 1     
-	  12 Input    8 Bit        Muxes := 2     
+	   4 Input   16 Bit        Muxes := 4     
+	  16 Input   11 Bit        Muxes := 1     
+	  16 Input   10 Bit        Muxes := 1     
+	  16 Input    9 Bit        Muxes := 1     
+	  16 Input    8 Bit        Muxes := 2     
 	  10 Input    8 Bit        Muxes := 2     
 	  10 Input    7 Bit        Muxes := 3     
-	  12 Input    5 Bit        Muxes := 1     
-	   2 Input    4 Bit        Muxes := 2     
-	  12 Input    4 Bit        Muxes := 3     
+	  16 Input    5 Bit        Muxes := 1     
+	   2 Input    4 Bit        Muxes := 3     
+	  16 Input    4 Bit        Muxes := 3     
+	   2 Input    3 Bit        Muxes := 1     
+	  16 Input    1 Bit        Muxes := 24    
 	   2 Input    1 Bit        Muxes := 12    
-	  12 Input    1 Bit        Muxes := 33    
-	 257 Input    1 Bit        Muxes := 1     
 	 513 Input    1 Bit        Muxes := 1     
+	 257 Input    1 Bit        Muxes := 1     
 ---------------------------------------------------------------------------------
 Finished RTL Component Statistics 
 ---------------------------------------------------------------------------------
@@ -161,109 +155,109 @@ Finished Part Resource Summary
 ---------------------------------------------------------------------------------
 Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[257]' (FDCE) to 'image_reg_reg[653]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[129]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[193]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[65]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[225]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[97]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[161]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[33]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[241]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[113]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[177]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[49]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[209]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[81]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[145]' (FDCE) to 'image_reg_reg[653]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[17]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[249]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[121]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[185]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[57]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[217]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[89]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[153]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[25]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[233]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[105]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[169]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[41]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[201]' (FDCE) to 'image_reg_reg[653]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[73]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[137]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[9]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[253]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[125]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[189]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[61]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[221]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[93]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[157]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[29]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[237]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[109]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[173]' (FDCE) to 'image_reg_reg[653]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[45]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[205]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[77]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[141]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[13]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[245]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[117]' (FDCE) to 'image_reg_reg[653]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[181]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[53]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[213]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[85]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[149]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[21]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[229]' (FDCE) to 'image_reg_reg[653]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[101]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[165]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[37]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[197]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[69]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[133]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[5]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[255]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[127]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[191]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[63]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[223]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[95]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[159]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[31]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[239]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[111]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[175]' (FDCE) to 'image_reg_reg[653]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[47]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[207]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[79]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[143]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[15]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[247]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[119]' (FDCE) to 'image_reg_reg[653]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[183]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[55]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[215]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[87]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[151]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[23]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[231]' (FDCE) to 'image_reg_reg[653]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[103]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[167]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[39]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[199]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[71]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[135]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[7]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[251]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[123]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[187]' (FDCE) to 'image_reg_reg[783]'
-INFO: [Synth 8-3886] merging instance 'image_reg_reg[59]' (FDCE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[270]' (FDRE) to 'image_reg_reg[663]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[142]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[206]' (FDRE) to 'image_reg_reg[663]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[78]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[238]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[110]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[174]' (FDRE) to 'image_reg_reg[663]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[46]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[254]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[126]' (FDRE) to 'image_reg_reg[663]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[190]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[62]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[222]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[94]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[158]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[30]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[262]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[134]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[198]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[70]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[230]' (FDRE) to 'image_reg_reg[663]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[102]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[166]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[38]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[246]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[118]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[182]' (FDRE) to 'image_reg_reg[663]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[54]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[214]' (FDRE) to 'image_reg_reg[663]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[86]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[150]' (FDRE) to 'image_reg_reg[663]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[22]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[266]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[138]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[202]' (FDRE) to 'image_reg_reg[663]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[74]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[234]' (FDRE) to 'image_reg_reg[663]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[106]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[170]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[42]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[250]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[122]' (FDRE) to 'image_reg_reg[663]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[186]' (FDRE) to 'image_reg_reg[663]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[58]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[218]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[90]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[154]' (FDRE) to 'image_reg_reg[663]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[26]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[258]' (FDRE) to 'image_reg_reg[663]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[130]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[194]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[66]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[226]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[98]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[162]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[34]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[242]' (FDRE) to 'image_reg_reg[663]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[114]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[178]' (FDRE) to 'image_reg_reg[663]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[50]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[210]' (FDRE) to 'image_reg_reg[663]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[82]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[146]' (FDRE) to 'image_reg_reg[663]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[18]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[268]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[140]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[204]' (FDRE) to 'image_reg_reg[663]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[76]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[236]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[108]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[172]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[44]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[252]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[124]' (FDRE) to 'image_reg_reg[663]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[188]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[60]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[220]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[92]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[156]' (FDRE) to 'image_reg_reg[663]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[28]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[260]' (FDRE) to 'image_reg_reg[663]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[132]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[196]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[68]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[228]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[100]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[164]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[36]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[244]' (FDRE) to 'image_reg_reg[663]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[116]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[180]' (FDRE) to 'image_reg_reg[663]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[52]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[212]' (FDRE) to 'image_reg_reg[663]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[84]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[148]' (FDRE) to 'image_reg_reg[663]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[20]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[264]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[136]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[200]' (FDRE) to 'image_reg_reg[783]'
+INFO: [Synth 8-3886] merging instance 'image_reg_reg[72]' (FDRE) to 'image_reg_reg[783]'
 INFO: [Common 17-14] Message 'Synth 8-3886' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 INFO: [Common 17-14] Message 'Synth 8-3886' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (\image_reg_reg[770] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\image_reg_reg[783] )
 INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
@@ -367,37 +361,64 @@ INFO: [Synth 8-5544] ROM "weights_out" won't be mapped to Block RAM because addr
 INFO: [Common 17-14] Message 'Synth 8-5544' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 INFO: [Common 17-14] Message 'Synth 8-5544' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:02:20 ; elapsed = 00:02:59 . Memory (MB): peak = 1487.066 ; gain = 929.703
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:59 ; elapsed = 00:01:30 . Memory (MB): peak = 1562.453 ; gain = 782.176
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
-
-ROM: Preliminary Mapping Report
-+------------+------------+---------------+----------------+
-|Module Name | RTL Object | Depth x Width | Implemented As | 
-+------------+------------+---------------+----------------+
-|bnn_top     | thresh_l2  | 256x7         | LUT            | 
-|bnn_top     | weights_l2 | 256x512       | LUT            | 
-|bnn_top     | thresh_l1  | 512x10        | LUT            | 
-|bnn_top     | weights_l1 | 512x784       | LUT            | 
-+------------+------------+---------------+----------------+
-
 ---------------------------------------------------------------------------------
-Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:12 ; elapsed = 00:01:52 . Memory (MB): peak = 1706.258 ; gain = 925.980
 ---------------------------------------------------------------------------------
-No constraint files found.
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:02:22 ; elapsed = 00:03:01 . Memory (MB): peak = 1511.719 ; gain = 954.355
+Finished Timing Optimization : Time (s): cpu = 00:02:04 ; elapsed = 00:02:45 . Memory (MB): peak = 1994.828 ; gain = 1214.551
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
+INFO: [Synth 8-7052] The timing for the instance l1_neuron_idx_reg_rep_0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l1_neuron_idx_reg_rep_0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l1_neuron_idx_reg_rep_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l1_neuron_idx_reg_rep_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l1_neuron_idx_reg_rep_2 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l1_neuron_idx_reg_rep_2 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l1_neuron_idx_reg_rep_3 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l1_neuron_idx_reg_rep_3 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l1_neuron_idx_reg_rep_4 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l1_neuron_idx_reg_rep_4 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l1_neuron_idx_reg_rep_5 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l1_neuron_idx_reg_rep_5 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l1_neuron_idx_reg_rep_6 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l1_neuron_idx_reg_rep_6 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l1_neuron_idx_reg_rep_7 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l1_neuron_idx_reg_rep_7 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l1_neuron_idx_reg_rep_8 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l1_neuron_idx_reg_rep_8 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l1_neuron_idx_reg_rep_9 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l1_neuron_idx_reg_rep_9 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l1_neuron_idx_reg_rep_10 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l1_neuron_idx_reg_rep_10 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l2_neuron_idx_reg_rep (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l2_neuron_idx_reg_rep_0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l2_neuron_idx_reg_rep_0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l2_neuron_idx_reg_rep_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l2_neuron_idx_reg_rep_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l2_neuron_idx_reg_rep_2 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l2_neuron_idx_reg_rep_2 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l2_neuron_idx_reg_rep_3 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l2_neuron_idx_reg_rep_3 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l2_neuron_idx_reg_rep_4 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l2_neuron_idx_reg_rep_4 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l2_neuron_idx_reg_rep_5 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l2_neuron_idx_reg_rep_5 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l2_neuron_idx_reg_rep_6 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l2_neuron_idx_reg_rep_6 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l2_neuron_idx_reg_rep_7 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance l1_neuron_idx_reg_rep (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:02:24 ; elapsed = 00:03:19 . Memory (MB): peak = 1511.719 ; gain = 954.355
+Finished Technology Mapping : Time (s): cpu = 00:02:07 ; elapsed = 00:02:48 . Memory (MB): peak = 1994.828 ; gain = 1214.551
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -415,37 +436,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:02:32 ; elapsed = 00:03:27 . Memory (MB): peak = 1725.758 ; gain = 1168.395
+Finished IO Insertion : Time (s): cpu = 00:02:13 ; elapsed = 00:02:54 . Memory (MB): peak = 1996.867 ; gain = 1216.590
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:02:32 ; elapsed = 00:03:28 . Memory (MB): peak = 1725.758 ; gain = 1168.395
+Finished Renaming Generated Instances : Time (s): cpu = 00:02:13 ; elapsed = 00:02:54 . Memory (MB): peak = 1996.867 ; gain = 1216.590
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:02:33 ; elapsed = 00:03:28 . Memory (MB): peak = 1725.758 ; gain = 1168.395
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:02:13 ; elapsed = 00:02:55 . Memory (MB): peak = 1996.867 ; gain = 1216.590
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:02:33 ; elapsed = 00:03:28 . Memory (MB): peak = 1725.758 ; gain = 1168.395
+Finished Renaming Generated Ports : Time (s): cpu = 00:02:13 ; elapsed = 00:02:55 . Memory (MB): peak = 1996.867 ; gain = 1216.590
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:02:34 ; elapsed = 00:03:29 . Memory (MB): peak = 1725.758 ; gain = 1168.395
+Finished Handling Custom Attributes : Time (s): cpu = 00:02:14 ; elapsed = 00:02:55 . Memory (MB): peak = 1997.871 ; gain = 1217.594
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:02:34 ; elapsed = 00:03:29 . Memory (MB): peak = 1725.758 ; gain = 1168.395
+Finished Renaming Generated Nets : Time (s): cpu = 00:02:14 ; elapsed = 00:02:55 . Memory (MB): peak = 1997.871 ; gain = 1217.594
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -458,54 +479,48 @@ Report BlackBoxes:
 +-+--------------+----------+
 
 Report Cell Usage: 
-+------+-------+------+
-|      |Cell   |Count |
-+------+-------+------+
-|1     |BUFG   |     1|
-|2     |CARRY4 |    23|
-|3     |LUT1   |     4|
-|4     |LUT2   |    96|
-|5     |LUT3   |   130|
-|6     |LUT4   |   205|
-|7     |LUT5   |   280|
-|8     |LUT6   | 11099|
-|9     |MUXF7  |  4926|
-|10    |MUXF8  |   302|
-|11    |FDCE   |  1110|
-|12    |FDRE   |   320|
-|13    |IBUF   |     3|
-|14    |OBUF   |     5|
-+------+-------+------+
-
-Report Instance Areas: 
-+------+---------+-------+------+
-|      |Instance |Module |Cells |
-+------+---------+-------+------+
-|1     |top      |       | 18504|
-+------+---------+-------+------+
++------+---------+------+
+|      |Cell     |Count |
++------+---------+------+
+|1     |BUFG     |     1|
+|2     |CARRY4   |    23|
+|3     |LUT1     |     3|
+|4     |LUT2     |    46|
+|5     |LUT3     |   113|
+|6     |LUT4     |   207|
+|7     |LUT5     |   736|
+|8     |LUT6     |  1484|
+|9     |MUXF7    |   433|
+|10    |MUXF8    |   159|
+|11    |RAMB18E1 |     3|
+|14    |RAMB36E1 |    18|
+|32    |FDRE     |  1306|
+|33    |IBUF     |     3|
+|34    |OBUF     |     5|
++------+---------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:02:34 ; elapsed = 00:03:29 . Memory (MB): peak = 1725.758 ; gain = 1168.395
+Finished Writing Synthesis Report : Time (s): cpu = 00:02:14 ; elapsed = 00:02:55 . Memory (MB): peak = 1997.871 ; gain = 1217.594
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 0 critical warnings and 11 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:02:34 ; elapsed = 00:03:30 . Memory (MB): peak = 1725.758 ; gain = 1168.395
-Synthesis Optimization Complete : Time (s): cpu = 00:02:34 ; elapsed = 00:03:30 . Memory (MB): peak = 1725.758 ; gain = 1168.395
+Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:01:56 ; elapsed = 00:02:51 . Memory (MB): peak = 1997.871 ; gain = 1158.824
+Synthesis Optimization Complete : Time (s): cpu = 00:02:14 ; elapsed = 00:02:56 . Memory (MB): peak = 1997.871 ; gain = 1217.594
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.245 . Memory (MB): peak = 1749.824 ; gain = 0.000
-INFO: [Netlist 29-17] Analyzing 5251 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.052 . Memory (MB): peak = 2006.969 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 636 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 WARNING: [Netlist 29-101] Netlist 'bnn_top' is not ideal for floorplanning, since the cellview 'bnn_top' contains a large number of primitives.  Please consider enabling hierarchy in synthesis if you want to do floorplanning.
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 1882.145 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 2010.609 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Synth Design complete | Checksum: ec68b45d
+Synth Design complete | Checksum: 3cd80259
 INFO: [Common 17-83] Releasing license: Synthesis
-231 Infos, 12 Warnings, 0 Critical Warnings and 0 Errors encountered.
+276 Infos, 1 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:02:43 ; elapsed = 00:03:41 . Memory (MB): peak = 1882.145 ; gain = 1333.828
-Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.091 . Memory (MB): peak = 1882.145 ; gain = 0.000
+synth_design: Time (s): cpu = 00:02:22 ; elapsed = 00:03:07 . Memory (MB): peak = 2010.609 ; gain = 1462.898
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.014 . Memory (MB): peak = 2010.609 ; gain = 0.000
 INFO: [Common 17-1381] The checkpoint 'C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.runs/synth_1/bnn_top.dcp' has been generated.
 INFO: [Vivado 12-24828] Executing command : report_utilization -file bnn_top_utilization_synth.rpt -pb bnn_top_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Tue Apr 14 21:12:24 2026...
+INFO: [Common 17-206] Exiting Vivado at Wed Apr 15 00:42:40 2026...

@@ -16,9 +16,9 @@ module bnn_tb;
 
     bnn_top dut (
         .clk(clk),
-        .rst_n(~rst),
+        .rst(rst),
         .start(start),
-        .pred_digit(predicted_digit),
+        .led(predicted_digit),
         .done(done)
     );
 
