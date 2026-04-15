@@ -1,0 +1,75 @@
+#-----------------------------------------------------------
+# Vivado v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Wed Apr 15 18:51:37 2026
+# Process ID         : 5216
+# Current directory  : C:/Users/rahul/Desktop/Projects/MNIST_BNNv2-e5ceac31bb832b9aff5d96f916c6f7556a91748d/project_1
+# Command line       : vivado.exe -gui_launcher_event rodinguilauncherevent10304 C:\Users\rahul\Desktop\Projects\MNIST_BNNv2-e5ceac31bb832b9aff5d96f916c6f7556a91748d\project_1\project_1.xpr
+# Log file           : C:/Users/rahul/Desktop/Projects/MNIST_BNNv2-e5ceac31bb832b9aff5d96f916c6f7556a91748d/project_1/vivado.log
+# Journal file       : C:/Users/rahul/Desktop/Projects/MNIST_BNNv2-e5ceac31bb832b9aff5d96f916c6f7556a91748d/project_1\vivado.jou
+# Running On         : system
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26200
+# Processor Detail   : AMD EPYC 7763 64-Core Processor                
+# CPU Frequency      : 2445 MHz
+# CPU Physical cores : 2
+# CPU Logical cores  : 4
+# Host memory        : 17126 MB
+# Swap memory        : 3087 MB
+# Total Virtual      : 20213 MB
+# Available Virtual  : 7071 MB
+#-----------------------------------------------------------
+start_gui
+open_project C:/Users/rahul/Desktop/Projects/MNIST_BNNv2-e5ceac31bb832b9aff5d96f916c6f7556a91748d/project_1/project_1.xpr
+update_compile_order -fileset sources_1
+launch_simulation
+source bnn_tb.tcl
+close_sim
+launch_simulation
+source bnn_tb.tcl
+set_property SOURCE_SET sources_1 [get_filesets sim_1]
+add_files -fileset sim_1 -norecurse C:/Users/rahul/Desktop/Projects/MNIST_BNNv2-e5ceac31bb832b9aff5d96f916c6f7556a91748d/mem_files/input.mem
+update_compile_order -fileset sim_1
+close_sim
+launch_simulation
+source bnn_tb.tcl
+close_sim
+launch_simulation
+source bnn_tb.tcl
+export_ip_user_files -of_objects  [get_files C:/Users/rahul/Desktop/Projects/MNIST_BNNv2-e5ceac31bb832b9aff5d96f916c6f7556a91748d/mem_files/input.mem] -no_script -reset -force -quiet
+remove_files  -fileset sim_1 C:/Users/rahul/Desktop/Projects/MNIST_BNNv2-e5ceac31bb832b9aff5d96f916c6f7556a91748d/mem_files/input.mem
+set_property SOURCE_SET sources_1 [get_filesets sim_1]
+add_files -fileset sim_1 -norecurse C:/Users/rahul/Desktop/Projects/MNIST_BNNv2-e5ceac31bb832b9aff5d96f916c6f7556a91748d/project_1/mem_files/input.mem
+update_compile_order -fileset sim_1
+close_sim
+launch_simulation
+source bnn_tb.tcl
+close_sim
+launch_simulation
+source bnn_tb.tcl
+close_sim
+launch_simulation
+source bnn_tb.tcl
+close_sim
+launch_simulation
+source bnn_tb.tcl
+close_sim
+launch_simulation
+source bnn_tb.tcl
+close_sim
+launch_simulation
+source bnn_tb.tcl
+close_sim
+launch_simulation
+source bnn_tb.tcl
+close_sim
+launch_simulation
+source bnn_tb.tcl
+close_sim
+launch_simulation
+source bnn_tb.tcl
+close_sim
+launch_simulation
+source bnn_tb.tcl

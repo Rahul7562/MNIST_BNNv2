@@ -1,0 +1,3 @@
+Time resolution is 1 ps
+Predicted: 8
+$finish called at time : 95 ns : File "C:/Users/rahul/Desktop/Projects/MNIST_BNNv2-e5ceac31bb832b9aff5d96f916c6f7556a91748d/project_1/project_1.srcs/sim_1/new/bnn_tb.sv" Line 45

@@ -5,5 +5,8 @@ Running: C:/AMDDesignTools/2025.2/Vivado/bin/unwrapped/win64.o/xelab.exe --incr 
 Using 2 slave threads.
 Starting static elaboration
 Pass Through NonSizing Optimizer
-Completed static elaboration
-INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel
+ERROR: [VRFC 10-3180] cannot find port 'pred_digit' on this module [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sim_1/new/bnn_tb.sv:19]
+ERROR: [VRFC 10-3180] cannot find port 'image_in' on this module [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sim_1/new/bnn_tb.sv:18]
+ERROR: [VRFC 10-3180] cannot find port 'rst_n' on this module [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sim_1/new/bnn_tb.sv:16]
+ERROR: [VRFC 10-8530] module 'bnn_top_default' is ignored due to previous errors [C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/project_1.srcs/sources_1/new/bnn_top.sv:5]
+ERROR: [XSIM 43-3322] Static elaboration of top level Verilog design unit(s) in library work failed.
