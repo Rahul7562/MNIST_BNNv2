@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
-| Date         : Wed Apr 15 00:43:35 2026
+| Date         : Wed Apr 15 14:28:53 2026
 | Host         : system running 64-bit major release  (build 9200)
 | Command      : report_drc -file bnn_top_drc_opted.rpt -pb bnn_top_drc_opted.pb -rpx bnn_top_drc_opted.rpx
 | Design       : bnn_top
