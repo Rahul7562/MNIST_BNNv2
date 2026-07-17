@@ -1,0 +1,111 @@
+# Issue Report for MNIST_BNNv2 Project
+
+This document details all the issues, bugs, and sub-optimal design choices found in the project, along with detailed explanations and instructions on how to fix them.
+
+## 1. Unused and Redundant Source Files
+**Files affected:**
+- `project_1/project_1.srcs/sources_1/new/bnn_layer1.sv`
+- `project_1/project_1.srcs/sources_1/new/bnn_layer2.sv`
+- `project_1/project_1.srcs/sources_1/new/bnn_output.sv`
+
+**Description:**
+These three modules (`bnn_layer1`, `bnn_layer2`, `bnn_output`) define combinatorial implementations of the BNN layers using `$countones`. However, the project's actual top module (`bnn_top.sv`) implements the entire network internally using a sequential state machine and `popcount16` chunks. The individual layer modules are never instantiated or used in the design. They add unnecessary clutter and confusion to the project.
+
+**How to fix:**
+- Delete these three unused source files from the repository.
+- Remove any references to them from Vivado projects and TCL scripts (like `recreate_project_legacy.tcl` if they are explicitly listed).
+
+## 2. Hardcoded Absolute Paths for Memory Files
+**Files affected:**
+- `project_1/project_1.srcs/sources_1/new/bnn_top.sv`
+- (And the unused `bnn_layer*.sv` and `bnn_output.sv` files)
+
+**Description:**
+The memory file path is defined using a hardcoded absolute path macro:
+```verilog
+`ifndef MEM_PATH
+`define MEM_PATH "C:/Users/rahul/Desktop/Projects/MNIST_BNNv2/project_1/mem_files/"
+`endif
+```
+This is a critical portability issue. If another developer clones this repository (e.g., on a Linux machine or in a different directory), Vivado will fail to synthesize or simulate the design because it cannot find the `.mem` files at `C:/Users/rahul/...`. The TCL scripts try to override `MEM_PATH` during simulation, but Synthesis is still vulnerable if the macro isn't properly overridden or if someone opens the project in the GUI without running the script.
+
+**How to fix:**
+- Remove the `MEM_PATH` macro entirely.
+- Use relative paths in the `$readmemb` and `$readmemh` calls, e.g., `$readmemb("input.mem", image_mem);`.
+- Vivado automatically searches for these files in the directories specified by the `set_property` commands. Ensure the memory files are added to the project as `sim_1` and `sources_1` filesets so Vivado copies them to the run directory automatically.
+
+## 3. Sub-optimal Block RAM Timing
+**Files affected:**
+- `project_1/project_1.srcs/sources_1/new/bnn_top.sv`
+- `project_1/project_1.runs/synth_1/runme.log`
+
+**Description:**
+The Synthesis log (`runme.log`) contains numerous warnings like:
+> `INFO: [Synth 8-7052] The timing for the instance ... (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.`
+
+This happens because the memory structures (like `weights_l1`, `weights_l2`) are defined as huge 2D arrays (`reg [783:0] weights_l1 [0:511]`). When inferred as Block RAMs (BRAM), Xilinx BRAMs have an optional output register that significantly improves timing ($F_{MAX}$). Because the code immediately slices the memory output (e.g., `weights_l1[l1_neuron_idx][bit_idx +: CHUNK_BITS]`) in a combinatorial manner before passing it to the popcount logic, Vivado cannot merge the slice and popcount logic into the BRAM output register.
+
+**How to fix:**
+- Register the full output row of the memory first before slicing.
+```verilog
+// Add a register for the memory output
+logic [783:0] current_weight_row_l1;
+
+// In a synchronous block, read the memory
+always_ff @(posedge clk) begin
+    if (state == SOME_PRE_FETCH_STATE) begin
+        current_weight_row_l1 <= weights_l1[l1_neuron_idx];
+    end
+end
+```
+- Then use `current_weight_row_l1[bit_idx +: CHUNK_BITS]` in the subsequent cycle. This allows Vivado to pack the register into the BRAM, fixing the timing warning and improving maximum clock speed.
+
+## 4. Sub-optimal Popcount and Accumulation Path
+**Files affected:**
+- `project_1/project_1.srcs/sources_1/new/bnn_top.sv`
+
+**Description:**
+The module uses a combinational function `popcount16` via a `for` loop. While synthesizable, this creates a deeply nested logic chain (16 additions). This logic is then fed immediately into `pop_acc <= pop_acc + l1_pop_reg` (an accumulator). The critical path from chunk registers (`l1_img_chunk_reg`) through the XNOR, through the 16-bit popcount, and into the accumulator is quite long and limits the maximum clock frequency.
+
+**How to fix:**
+- Implement the popcount using an adder tree (e.g., add pairs of bits, then pairs of 2-bit sums, etc.) instead of a sequential loop, or ensure synthesis tools correctly infer a fast parallel adder tree.
+- Alternatively, add an extra pipeline stage between `L1_POP` and `L1_ACCUM`. Register the output of the popcount before adding it to the accumulator.
+
+## 5. Potential Simulation Timeout in Testbench
+**Files affected:**
+- `project_1/project_1.srcs/sim_1/new/bnn_tb.sv`
+
+**Description:**
+The testbench sets `MAX_WAIT_CYCLES = 10000000`. The network processes sequentially in chunks of 16 bits.
+- Layer 1: 512 neurons * 49 chunks * 3 cycles = ~75,264 cycles.
+- Layer 2: 256 neurons * 32 chunks * 3 cycles = ~24,576 cycles.
+- Output: 10 classes * 256 features = ~2,560 cycles.
+Total latency is around 100k - 110k cycles. This means the design takes over 1 millisecond at 100MHz to process a single digit. While this fits within the timeout, the extremely long sequential processing time is inefficient for an FPGA implementation which should ideally leverage massive parallelism.
+
+**How to fix:**
+- **Architectural fix:** Increase `CHUNK_BITS` (e.g., from 16 to 64 or 128) if Block RAM width allows, or parallelize execution across multiple neurons simultaneously rather than computing one neuron at a time. The current architecture uses barely any FPGA DSPs or LUTs but takes huge amounts of time.
+
+## 6. Hardcoded Target Device
+**Files affected:**
+- `project_1/recreate_project_legacy.tcl`
+- `project_1/project_1.srcs/constrs_1/new/zedboard_minimal.xdc`
+
+**Description:**
+The target FPGA part is hardcoded as `xc7z020clg484-1` (ZedBoard) in the TCL scripts. If the user wants to port this to another board (like PYNQ-Z1, Basys3, etc.), they must manually change constraints and scripts everywhere.
+The reset `rst` and `start` signals are tied to `LVCMOS18` (1.8V) while `clk` and `led` are `LVCMOS33` (3.3V). Mixing IO standards across different banks on the same board is standard, but the user must be highly aware that if they port to a board with only 3.3V banks (like Basys 3), they will encounter DRC errors.
+
+**How to fix:**
+- Parametrize the build scripts to accept the board or part as a variable more cleanly.
+- Document the IO standard requirements clearly in the `README.md` (which currently doesn't exist).
+
+## 7. Python Script Compatibility
+**Files affected:**
+- `watch_my_digit.ps1`
+
+**Description:**
+The powershell script uses `python` as the command. On some systems (especially Linux or newer macOS, though this is a PS1 script indicating Windows), it might require `python3` or `py`. It also relies on absolute paths:
+`$ImagePath = "C:\Users\rahul\Desktop\Projects\MNIST_BNNv2\my_digit.png"`
+This is completely broken for anyone cloning the repo to another path.
+
+**How to fix:**
+- Change the PowerShell script defaults to use relative paths (`.\my_digit.png`).
