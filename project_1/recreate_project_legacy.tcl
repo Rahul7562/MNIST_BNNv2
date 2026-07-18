@@ -72,8 +72,6 @@ if {[llength $mem_files] > 0} {
 }
 
 # Match existing simulation setup used by bnn_tb.tcl
-set mem_path_norm [string map {\\ /} $mem_dir]
-set_property -name xsim.simulate.xsim.more_options -value "-d MEM_PATH=$mem_path_norm/" -objects [get_filesets sim_1]
 set_property -name xsim.simulate.runtime -value "all" -objects [get_filesets sim_1]
 
 update_compile_order -fileset sources_1

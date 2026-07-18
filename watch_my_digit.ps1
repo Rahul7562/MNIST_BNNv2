@@ -1,6 +1,6 @@
 param(
-    [string]$ImagePath = "C:\Users\rahul\Desktop\Projects\MNIST_BNNv2\my_digit.png",
-    [string]$ConverterPath = "C:\Users\rahul\Desktop\Projects\MNIST_BNNv2\image_to_mem.py",
+    [string]$ImagePath = ".\my_digit.png",
+    [string]$ConverterPath = ".\image_to_mem.py",
     [string]$OutputName = "input.mem",
     [switch]$Once
 )
@@ -21,7 +21,14 @@ function Invoke-Conversion {
         return
     }
 
-    python $ConverterPath $ImagePath $OutputName
+    $pythonCmd = "python"
+    if (Get-Command "python3" -ErrorAction SilentlyContinue) {
+        $pythonCmd = "python3"
+    } elseif (Get-Command "py" -ErrorAction SilentlyContinue) {
+        $pythonCmd = "py"
+    }
+
+    & $pythonCmd $ConverterPath $ImagePath $OutputName
     if ($LASTEXITCODE -ne 0) {
         Write-Warning "Conversion failed with exit code $LASTEXITCODE"
     } else {
@@ -36,6 +43,9 @@ if ($Once) {
 }
 
 $watchDir = Split-Path -Parent $ImagePath
+if ([string]::IsNullOrEmpty($watchDir)) {
+    $watchDir = "."
+}
 $watchFile = Split-Path -Leaf $ImagePath
 
 if (-not (Test-Path $watchDir)) {
