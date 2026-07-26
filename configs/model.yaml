@@ -1,0 +1,3 @@
+input_size: 784
+hidden_sizes: [256, 256]
+num_classes: 10
