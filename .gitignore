@@ -28,3 +28,5 @@ htmlcov/
 # dataset and generated artifacts
 mem_files/input*.mem
 *.log
+*.vcd
+bnn_sim
