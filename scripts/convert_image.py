@@ -8,20 +8,17 @@ from pathlib import Path
 
 import numpy as np
 from PIL import Image
-
+import config as my_config
 
 IMG_SIZE = 28
 THRESHOLD = 127
 
-
 def resolve_mem_dir() -> Path:
-    root = Path(__file__).resolve().parent
-    candidates = [root / "project_1" / "mem_files", root / "mem_files"]
-    for path in candidates:
-        if path.exists():
-            return path
-    raise FileNotFoundError("Could not find mem_files folder")
-
+    cfg = my_config.get_config()
+    mem_dir = Path(cfg["mem_dir"])
+    if mem_dir.exists():
+        return mem_dir
+    raise FileNotFoundError(f"Could not find mem_files folder at {mem_dir}")
 
 def convert_image_to_bits(image_path: Path) -> str:
     img = Image.open(image_path).convert("L")
@@ -49,7 +46,6 @@ def convert_image_to_bits(image_path: Path) -> str:
     binary = (arr28 < THRESHOLD).astype(np.uint8)
     return "".join("1" if v else "0" for v in binary.reshape(-1))
 
-
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Convert image to .mem in mem_files")
     parser.add_argument("image", type=Path, help="Input image path (png/jpg)")
@@ -60,7 +56,6 @@ def build_parser() -> argparse.ArgumentParser:
         help="Optional output file name (default: input.mem)",
     )
     return parser
-
 
 def main() -> None:
     args = build_parser().parse_args()
@@ -82,7 +77,6 @@ def main() -> None:
 
     output_path.write_text(bits + "\n", encoding="ascii")
     print(f"Saved: {output_path}")
-
 
 if __name__ == "__main__":
     main()
