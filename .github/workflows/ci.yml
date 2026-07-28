@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [finalized, phase1-bnn-fixes, phase2-fpga-rtl, phase3-vivado, phase4-docs-ci]
+  pull_request:
+    branches: [finalized]
+
+# Cancel superseded runs on the same ref.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install Python deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Install Icarus Verilog (sim)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y iverilog
+
+      - name: pytest (Phase 1 regression)
+        run: |
+          python -m pytest tests/ -q
+
+      - name: Icarus simulation (HW == SW popcount, >=40 images)
+        env:
+          SIM_COUNT: "50"
+        run: |
+          bash hw/sim/run_sim.sh 2>&1 | tee sim.log
+          grep -q "HW SIM PASS" sim.log || { echo "SIM FAILED"; exit 1; }
+
+      - name: Independent 10k SW/HW verification (Phase 1 gate)
+        run: |
+          python scripts/verify_phase1.py 10000 2>&1 | tee verify.log
+          grep -q "PASS" verify.log || { echo "VERIFY FAILED"; exit 1; }
