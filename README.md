@@ -5,40 +5,62 @@ deployed as an FPGA inference core. Goal: **>95% accuracy on unseen handwritten
 digits**, with **bit-exact** agreement between software inference and the hardware
 popcount path.
 
-## What's here
+## Repository layout
 
-| Path | What |
-|------|------|
+| Path | Contents |
+|------|----------|
 | `sw/model/bnn.py` | BNN (per-pixel standardized input → Sign binarize; BinarySign hidden acts) |
-| `scripts/train.py` | Reproducible training (seeded), exports mem_files |
+| `sw/training/dataset.py` | MNIST loading + per-pixel standardization |
+| `scripts/train.py` | Reproducible training (seeded) → saves checkpoint + mean/std |
 | `scripts/export.py` | XNOR-popcount parameter export (ARCHITECTURE.md §5) |
 | `scripts/convert_image.py` | Classify `my_digit.png` (SW + HW popcount) |
 | `scripts/verify_phase1.py` | Independent 10k SW/HW bit-exact gate |
-| `hw/rtl/` | SystemVerilog inference core (`bnn_top`, `bnn_layer`, `popcount`) |
-| `hw/sim/` | Icarus testbench + `run_sim.sh` (HW==SW gate) |
+| `mem_files/` | Exported weights / thresholds / scales / offsets / meta (source of truth) |
+| `configs/` | `default.yaml`, `model.yaml`, `training.yaml` |
+| `hw/rtl/` | SystemVerilog core: `bnn_pkg`, `popcount`, `bnn_layer`, `bnn_top` |
+| `hw/sim/` | Icarus testbench + `run_sim.sh` (HW == SW gate) |
 | `hw/constraints/zedboard.xdc` | Zedboard (xc7z020clg400-1) constraints |
-| `hw/vivado/` | `build.tcl` + `run_vivado.sh` (synth/impl/bitstream) |
-| `docs/ARCHITECTURE.md` | Frozen math contract + HW interface |
-| `PROJECT_ROADMAP.md` | Phase status |
+| `hw/vivado/` | `build.tcl`, `run_vivado.sh`, `README.md` (Vivado build guide) |
+| `docs/` | `ARCHITECTURE.md` (math + HW contract), `PROJECT_ROADMAP.md` |
+| `tests/` | `test_model.py`, `test_training.py`, `test_export.py` |
 
-## Quick start
+## Quick start (software + simulation)
 
 ```bash
 pip install -r requirements.txt
-python scripts/train.py                 # train + export mem_files/
+
+python scripts/train.py                 # train + export mem_files/   (reproducible)
 bash hw/sim/run_sim.sh                  # Icarus sim: HW == SW popcount (100%)
-python scripts/verify_phase1.py 10000    # independent 10k gate (SW 96.45%, HW 96.45%, 100% exact)
+python scripts/verify_phase1.py 10000    # independent 10k gate
 pytest tests/                           # unit tests (7/7)
-python scripts/convert_image.py         # classify my_digit.png
-bash hw/vivado/run_vivado.sh           # (Vivado host) synthesize + bitstream
+python scripts/convert_image.py         # classify my_digit.png (SW + HW)
 ```
+
+## Building on FPGA with Vivado
+
+Full walkthrough (GUI + batch) is in **`hw/vivado/README.md`**. Summary:
+
+```bash
+bash hw/vivado/run_vivado.sh           # synth + impl + bitstream (Vivado on PATH)
+```
+
+This produces `bnn_top.bit` plus utilization/timing reports for the Zedboard. The
+same RTL that passes the Icarus simulation is what gets synthesized — no separate
+"sim vs synth" core. The core loads weights/thresholds/scales from `hw/mem/` (generated
+by the sim script) via `$readmemh`; no manual `.coe` is needed.
 
 ## Verification status
 
-- SW accuracy: **96.45%** • HW(popcount): **96.45%** • bit-exact HW↔SW: **100%** (10k).
-- Icarus sim: **100%** (≥40 MNIST images incl. `my_digit.png`).
-- CI: `.github/workflows/ci.yml` runs pytest + sim + 10k gate on every push/PR.
-- FPGA synthesis/bitstream: run `hw/vivado/run_vivado.sh` on a Vivado-equipped host
-  (Vivado is not available in the sim-only CI environment).
+- SW accuracy: **96.45%** • HW(popcount): **96.45%** • bit-exact HW↔SW: **100%** (10k)
+- Icarus sim: **100%** (≥40 MNIST images incl. `my_digit.png`)
+- CI (`.github/workflows/ci.yml`): pytest + sim + 10k gate on every push/PR
 
-See `docs/ARCHITECTURE.md` for the math and `hw/README.md` for the HW build/sim flow.
+## Reproducibility
+
+Training is seeded (`configs/training.yaml`), and the export pipeline regenerates all
+FPGA parameters from the checkpoint, so **retraining on a new dataset and regenerating
+FPGA artifacts requires only**: `python scripts/train.py` → `bash hw/sim/run_sim.sh`
+→ (on a Vivado host) `bash hw/vivado/run_vivado.sh`.
+
+See `docs/ARCHITECTURE.md` for the math contract and `hw/README.md` for the HW
+build/sim flow.
