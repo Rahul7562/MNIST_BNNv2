@@ -51,15 +51,21 @@ module bnn_top (
 
     assign am_start = l3_done;
 
-    // ---- Inlined output-layer argmax (scale_c * z_c + offset_c, argmax) ----
+    // ---- Inlined output-layer argmax (FIXED-POINT, synthesizable) ----
+    //   logit_fxd_c = scale_fxd_c * z_c + offset_fxd_c,  value = round(float * 2**FXD)
+    //   digit = argmax_c(logit_fxd_c)
+    // Scales/offsets are per-class constants loaded from *_fxd.hex as signed 32-bit.
+    // No `real` / $bitstoreal -> synthesizable in Vivado. Bit-exact with the SW
+    // float reference (FXD=16 leaves sub-LSB rounding error; see prepare_hw_mem.py).
     `ifndef MEM_PATH
         `define MEM_PATH "mem_files/"
     `endif
-    reg [63:0] scale_raw [0:(NOUT3-1)];
-    reg [63:0] offset_raw [0:(NOUT3-1)];
+    localparam int FXD = 16;
+    reg signed [31:0] scale_fxd [0:(NOUT3-1)];
+    reg signed [31:0] offset_fxd [0:(NOUT3-1)];
     initial begin
-        $readmemh({`MEM_PATH, "layer3_scales.hex"},  scale_raw);
-        $readmemh({`MEM_PATH, "layer3_offsets.hex"}, offset_raw);
+        $readmemh({`MEM_PATH, "layer3_scales_fxd.hex"},  scale_fxd);
+        $readmemh({`MEM_PATH, "layer3_offsets_fxd.hex"}, offset_fxd);
     end
 
     always @(posedge clk or posedge rst) begin
@@ -69,17 +75,17 @@ module bnn_top (
         end else begin
             am_done <= 1'b0;
             if (am_start) begin
-                real best;
+                // 32-bit signed logits are plenty: scale_fxd*z (|z|<=256, FXD=16)
+                // fits in signed 32-bit; argmax only needs relative ordering.
+                logic signed [31:0] logits [0:(NOUT3-1)];
+                logic signed [31:0] best;
                 int  best_idx;
-                best = -1.0e30;
+                best = 32'sh80000000;   // most-negative signed 32-bit
                 best_idx = 0;
                 for (int c = 0; c < NOUT3; c = c + 1) begin
-                    real sc, of, lg;
-                    sc = $bitstoreal(scale_raw[c]);
-                    of = $bitstoreal(offset_raw[c]);
-                    lg = sc * $itor(z3[c]) + of;
-                    if (lg > best) begin
-                        best = lg;
+                    logits[c] = scale_fxd[c] * z3[c] + offset_fxd[c];
+                    if (logits[c] > best) begin
+                        best = logits[c];
                         best_idx = c;
                     end
                 end
