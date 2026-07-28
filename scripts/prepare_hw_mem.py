@@ -69,12 +69,24 @@ def main():
             for v in vals:
                 f.write(format(int(v), "x") + "\n")
 
-    # Scales/offsets: float -> IEEE-754 double hex (for $bitstoreal).
+    # Scales/offsets: float -> IEEE-754 double hex (for $bitstoreal / reference).
     for fn in ["layer3_scales.mem", "layer3_offsets.mem"]:
         vals = _read_dec(fn)
         with open(os.path.join(HWMEM, fn.replace(".mem", ".hex")), "w") as f:
             for v in vals:
                 f.write(struct.pack(">d", float(v)).hex() + "\n")
+
+    # Scales/offsets: fixed-point signed 32-bit hex for SYNTHESIS (no real/$bitstoreal).
+    #   logit_fxd = scale_fxd * z + offset_fxd,  with value = round(float * 2**FXD)
+    # FXD=16 keeps scale*z (|z|<=256, |scale|~0.03) within signed 32-bit and leaves
+    # sub-LSB rounding error (<0.004) so argmax is bit-exact vs the float reference.
+    FXD = 16
+    for fn in ["layer3_scales.mem", "layer3_offsets.mem"]:
+        vals = _read_dec(fn)
+        with open(os.path.join(HWMEM, fn.replace(".mem", "_fxd.hex")), "w") as f:
+            for v in vals:
+                ival = int(round(float(v) * (1 << FXD)))
+                f.write(format(ival & 0xFFFFFFFF, "08x") + "\n")  # 32-bit two's complement
 
     # Test vectors: MNIST t10k (all 10k) + my_digit.png, binarized 784-bit hex.
     ckpt = torch = None  # imported lazily to avoid hard dep if run standalone

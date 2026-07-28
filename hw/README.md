@@ -87,12 +87,48 @@ python3 scripts/verify_phase1.py     # SW vs HW popcount over 10k (100% bit-exac
 python3 scripts/convert_image.py     # my_digit.png: SW=N, HW=N, OK
 ```
 
-## Vivado (Phase 3 — not yet wired)
+## Vivado (Phase 3 — synthesizable build)
 
-The RTL uses synthesizable constructs (`always_ff`, `$readmemh` for BRAM init,
-registered popcount). Phase 3 will add the Xilinx project wrapper, timing
-constraints, and BRAM inference directives. The simulation here is the functional
-gate; synthesizability is validated separately in Phase 3.
+The RTL is **fully synthesizable** (no `real`/`$bitstoreal`; the output argmax uses
+fixed-point integer arithmetic — see `bnn_top.sv`). Weights/thresholds/scales are
+loaded via `$readmemh`, which Vivado honors for BRAM initialization, so no manual
+`.coe` conversion is needed.
+
+Files:
+- `hw/constraints/zedboard.xdc` — Zedboard (xc7z020clg400-1): 100 MHz clock, reset,
+  start/done/digit ports, implementation directives.
+- `hw/vivado/build.tcl` — `create_project` → synth → impl → write_bitstream.
+- `hw/vivado/run_vivado.sh` — wrapper (requires Vivado on PATH).
+
+Build (on a machine with Vivado):
+```bash
+bash hw/vivado/run_vivado.sh
+# or directly:
+vivado -mode batch -source hw/vivado/build.tcl -tclargs hw/mem
+```
+Outputs: `vivado_project/mnist_bnn_vivado.runs/impl_1/bnn_top.bit`, plus
+`utilization.rpt` and `timing_summary.rpt`.
+
+### Fixed-point argmax
+`logit_fxd_c = scale_fxd_c * z_c + offset_fxd_c`, where `scale_fxd`/`offset_fxd`
+are the float values rounded to `FXD=16` fractional bits (emitted as signed 32-bit
+hex by `scripts/prepare_hw_mem.py` into `layer3_scales_fxd.hex` /
+`layer3_offsets_fxd.hex`). Rounding error is sub-LSB, so the FPGA argmax is
+**bit-exact** with the SW float reference (verified: Icarus sim 100% match with the
+same core). The `real`/`$bitstoreal` path used only for early functional sim and has
+been removed from the shipped core.
+
+### What CAN be verified without Vivado
+- The exact synthesizable core runs in Icarus: `bash hw/sim/run_sim.sh` (100% match
+  vs SW popcount recompute, ≥40 images + the user's `my_digit.png`).
+- pytest 7/7 (Phase 1 regression).
+- `python3 scripts/verify_phase1.py` (SW 96.45% / HW 96.45% / 100% bit-exact / 10k).
+
+### What requires the user's machine (no Vivado here)
+- Actual synthesis, place-and-route, timing closure, bitstream, resource numbers
+  (LUT/BRAM/DSP). The Tcl + XDC are provided and reviewed for correctness; run them
+  on a Vivado-equipped host.
+
 
 ## Known limitations (sim only)
 
