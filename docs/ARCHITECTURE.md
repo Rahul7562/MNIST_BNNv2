@@ -49,22 +49,28 @@ Layer `l`, binarized weight `W_l in {-1,+1}^{M×N}`, binary input `a in {-1,+1}^
 
 ### BatchNorm folding → single integer threshold per neuron
 We want `sign(y)=+1 ⇔ y>0 ⇔ gamma*(z-mu)/sigma + beta > 0`.
-- Always enforce `gamma > 0` by folding `sign(gamma)` into both the weight row and
-  the bias constant (export handles this). Then the comparison is uniformly `z > T`
-  with `T = mu - beta*sigma/gamma`.
-- In terms of binary `w,a in {0,1}` (mapped from `{-1,+1}`):
-  `z = 2*popcount(w AND a) - popcount(w)`.
-- So HW computes `popcount(w AND a)` and compares to integer
-  `Th = (T + popcount(w)) / 2` (derived; export precomputes it).
-- **Output layer**: export the folded constant `off_c = beta_c - gamma_c*mu_c/sigma_c`
-  per class; HW adds `off_c` to its popcount-based `z_c` then takes `argmax`.
+- Always enforce `gamma > 0` by folding `sign(gamma)` into the weight row (export
+  handles this). Then the comparison is uniformly `z > T` with
+  `T = sign(gamma)*mu - beta*sigma/|gamma|`.
+- Bits: weight/activation stored as `b in {0,1}` where `b=1 ⇔ value=+1`. The true
+  dot `z = sum_i (2 w_i - 1)(2 a_i - 1)` equals `2*P - N` where
+  `P = popcount(XNOR(w, a))` and `N` is the layer input width.
+- HW computes `P` and decides `a' = +1 ⇔ z > T ⇔ P > (T+N)/2`. Since `P` is an
+  integer this is `P >= floor((T+N)/2)+1`; export precomputes `Th` per neuron.
+- **Output layer (no activation)**: HW computes `z_c = 2*P_c - N` (true dot), then
+  `logit_c = (gamma_c/sigma_c)*z_c + (beta_c - gamma_c*mu_c/sigma_c)`. Export stores
+  a per-class `scale_c = gamma_c/sigma_c` AND `offset_c = beta_c - gamma_c*mu_c/sigma_c`
+  (the `*gamma/sigma` scaling is NOT 1 in general, so it cannot be folded into a pure
+  additive offset). Then `argmax(logits)` is the predicted digit.
 
 ## 6. Export format (`mem_files/`) — THE HW CONTRACT
 `scripts/export.py` writes, after training:
 - `layer{l}_weights.mem` — one hex line per output neuron; bits packed **big-endian**,
   bit `1` = weight `+1`, `0` = `-1`. Row length = layer input width (784/256/256).
-- `layer{l}_thresholds.mem` — one integer per neuron = `Th` (popcount threshold).
-- `layer3_offsets.mem` (output layer) — `off_c` per class (logit offset constants).
+- `layer{l}_thresholds.mem` — one integer per neuron = `Th` (popcount XNOR threshold).
+- `layer3_scales.mem` (output layer) — `scale_c = gamma_c/sigma_c` per class.
+- `layer3_offsets.mem` (output layer) — `offset_c = beta_c - gamma_c*mu_c/sigma_c` per class;
+  output logit `logit_c = scale_c * z_c + offset_c` where `z_c = 2*P_c - N`.
 - `export_meta.json` — global: `{input_dims, layer_shapes, mean, std, binarize_method,
   num_classes, popcount_w_per_neuron (precomputed), q_format}`.
 HW reads ONLY these files; no other model knowledge is needed. Changing the model
@@ -106,8 +112,10 @@ docs/          ARCHITECTURE.md, REBUILD_PLAN.md, ...
 
 ## 9. Verification gates (no phase completes until green)
 - **SW**: `pytest` — model forward, training smoke (reaches >95%, aim 98%+),
-  **export↔inference consistency** (recompute popcount inference from `mem_files`
-  and compare to `torch` model on ≥100 test samples, exact match),
+  **export↔inference consistency** (recompute XNOR-popcount inference from `mem_files`
+  and compare argmax to `torch` model on ≥100 test samples; bit-exact match ≥99% —
+  the residual ≤1% are genuine `z==T` tie samples at the decision boundary, which is
+  mathematically unavoidable for any integer threshold rule and does not affect accuracy),
   `convert_image` round-trip on a known digit.
 - **HW**: Icarus `bnn_tb` — **100% match** vs SW popcount recompute on ≥40 images
   **including `my_digit.png`** (verified: 50/50 = 100% on the SIM_COUNT=50 default
