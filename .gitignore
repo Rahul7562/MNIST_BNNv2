@@ -1,30 +1,13 @@
+# Large raw datasets (download via get_dataset.py / kaggle)
+Dataset/
+
+# Test-only checkpoints (must not clobber production model)
+checkpoints_test/
+
+# Generated smoke-test artifacts
+my_digit.png
+
+# Python
 __pycache__/
 *.pyc
-*.pyo
-*.pyd
-
-# build artifacts
-build/
-dist/
-*.egg-info/
-*.egg
-
-# environment
-venv/
-.venv/
-env/
-.env/
-
-# IDEs
-.idea/
-.vscode/
-
-# test coverage
-.coverage
-htmlcov/
 .pytest_cache/
-.mypy_cache/
-
-# dataset and generated artifacts
-mem_files/input*.mem
-*.log

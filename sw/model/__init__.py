@@ -1,3 +1,9 @@
-from .bnn import BNN, BinarizeLinear, binarize
+from .bnn import (
+    BNN,
+    BinarizeLinear,
+    BinarySign,
+    binary_sign,
+    binarize_weight,
+)
 
-__all__ = ["BNN", "BinarizeLinear", "binarize"]
+__all__ = ["BNN", "BinarizeLinear", "BinarySign", "binary_sign", "binarize_weight"]

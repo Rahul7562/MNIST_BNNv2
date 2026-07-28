@@ -1,114 +1,146 @@
+"""Export a trained BNN to the hardware contract files in mem_files/.
+
+Source of truth: docs/ARCHITECTURE.md §5 (BatchNorm folding) and §6 (export format).
+
+For each layer l with binarized weight W_l in {-1,+1}^{M x N} and BatchNorm
+(gamma, beta, mu, sigma):
+  * Enforce gamma > 0 by folding sign(gamma) into the weight row:
+        w_new = w * sign(gamma)          (in {-1, +1})
+        T     = sign(gamma)*mu - beta*sigma/|gamma|
+  * Hidden layer: HW computes P = popcount(XNOR(w_new, a)), z = 2*P - N, then
+    decides a' = +1 iff z > T  <=>  P >= floor((T + N)/2) + 1  (integer compare).
+  * Output layer (no activation): HW computes z_c = 2*P_c - N (true dot), then
+        logit_c = (gamma_c/sigma_c)*z_c + (beta_c - gamma_c*mu_c/sigma_c)
+    i.e. per-class scale = gamma_c/sigma_c and offset = beta_c - gamma_c*mu_c/sigma_c.
+HW reads ONLY these .mem files + export_meta.json.
+"""
+
+import json
 import os
-import torch
+
 import numpy as np
+import torch
+import yaml
 from pathlib import Path
+
 from config import get_config
-from sw.model import BNN
+from sw.model import BNN, binarize_weight
 
-def export_weights():
+
+def _bits_to_hex(bits):
+    """bits: iterable of 0/1 (MSB-first). Return big-endian hex string (no 0x)."""
+    bit_str = "".join(str(int(b)) for b in bits)
+    hex_len = (len(bit_str) + 3) // 4
+    return format(int(bit_str, 2), f"0{hex_len}x")
+
+
+def export_model():
     cfg = get_config()
-
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
-    # Load model
-    model = BNN(
-        input_size=cfg["model"]["input_size"],
-        hidden_sizes=cfg["model"]["hidden_sizes"],
-        num_classes=cfg["model"]["num_classes"]
-    ).to(device)
-
-    checkpoint_path = Path(cfg["training"]["checkpoint_dir"]) / "best_model.pth"
-    if not checkpoint_path.exists():
-        raise FileNotFoundError(f"No trained model found at {checkpoint_path}")
-
-    model.load_state_dict(torch.load(checkpoint_path, map_location=device))
-    model.eval()
-
+    model_cfg = cfg["model"]
+    train_cfg = cfg["training"]
     mem_dir = Path(cfg["mem_dir"])
     mem_dir.mkdir(parents=True, exist_ok=True)
 
-    # Process layers and export
-    # The network is: BinarizeLinear -> BatchNorm -> Hardtanh -> ...
-    # We will export:
-    # 1. Binarized Weights (sign) packed into hexadecimal format.
-    # 2. Thresholds for activations.
-    # Since BatchNorm modifies the threshold, we combine them:
-    # y = BatchNorm(w*x) = gamma * (w*x - mu)/sqrt(var + eps) + beta
-    # we want y > 0 to be a '1' output, and y <= 0 to be '-1' output, since Hardtanh/Sign activation follows.
-    # gamma * (w*x - mu) / sigma + beta > 0
-    # gamma/sigma * w*x > gamma*mu/sigma - beta
-    # w*x > mu - beta*sigma/gamma (if gamma > 0)
-    # Threshold = mu - beta*sigma/gamma
+    checkpoint_path = Path(train_cfg["checkpoint_dir"]) / "best_model.pth"
+    if not checkpoint_path.exists():
+        raise FileNotFoundError(f"No trained model at {checkpoint_path}")
 
-    # In chunked popcount BNNs, inputs are -1 and +1.
-    # dot product ranges from -N to N.
-    # Let's extract weights and thresholds directly.
-    # For a simple export, we can just save the raw binarized weights and combined thresholds.
+    ckpt = torch.load(checkpoint_path, map_location="cpu")
+    model = BNN(
+        input_size=model_cfg["input_size"],
+        hidden_sizes=model_cfg["hidden_sizes"],
+        num_classes=model_cfg["num_classes"],
+    )
+    model.load_state_dict(ckpt["model_state_dict"])
+    model.eval()
 
-    linear_idx = 1
+    mean = np.asarray(ckpt["mean"]).reshape(-1)
+    std = np.asarray(ckpt["std"]).reshape(-1)
 
+    meta = {
+        "input_dims": [1, 28, 28],
+        "layer_shapes": [],
+        "mean": mean.tolist(),
+        "std": std.tolist(),
+        "binarize_method": "sign_ste",
+        "num_classes": model_cfg["num_classes"],
+        "popcount_w_per_neuron": [],
+        "q_format": "binary_1_0_mapped_from_plus1_minus1",
+    }
+
+    features = list(model.features)
+    layer_idx = 1
+    i = 0
     with torch.no_grad():
-        features = list(model.features)
-        for i in range(len(features)):
-            if isinstance(features[i], torch.nn.Linear):
-                # Binarized weights: sign(w), convert to 0 and 1
-                # Where 1 represents +1 and 0 represents -1
-                weights = features[i].weight.data
-                bin_weights = torch.sign(weights).add_(weights == 0).float()
-                # Map -1 -> 0, +1 -> 1
-                bin_weights_01 = ((bin_weights + 1) / 2).int().cpu().numpy()
+        while i < len(features):
+            lin = features[i]
+            if not isinstance(lin, torch.nn.Linear):
+                i += 1
+                continue
+            bn = features[i + 1] if (i + 1 < len(features)) else None
 
-                # Check for BatchNorm layer immediately after
-                has_bn = i + 1 < len(features) and isinstance(features[i+1], torch.nn.BatchNorm1d)
+            # Binarized weights in {-1,+1}, stored as bit (1 = +1).
+            w = binarize_weight(lin.weight).detach().numpy() * 2.0 - 1.0  # {-1,+1}
+            w_01 = (w > 0).astype(np.int32)  # 1 = +1
 
-                if has_bn:
-                    bn = features[i+1]
-                    gamma = bn.weight.data
-                    beta = bn.bias.data
-                    mu = bn.running_mean.data
-                    var = bn.running_var.data
-                    eps = bn.eps
+            is_output = bn is None or (i + 2 >= len(features))
 
-                    sigma = torch.sqrt(var + eps)
-                    # Threshold T = mu - beta * sigma / gamma
-                    thresholds = mu - (beta * sigma / gamma)
+            if bn is not None:
+                gamma = bn.weight.detach().numpy()
+                beta = bn.bias.detach().numpy()
+                mu = bn.running_mean.detach().numpy()
+                var = bn.running_var.detach().numpy()
+                sigma = np.sqrt(var + bn.eps)
 
-                    # If gamma is negative, the inequality flips. For now, assume gamma > 0 or handle it:
-                    # Let's just save threshold. If gamma < 0, we flip the threshold logic in hardware (or invert weights)
-                    # We will save thresholds as float for now, or int since w*x is integer.
-                    # Since w*x step is 2, rounding to nearest int is fine.
-                    thresholds = thresholds.cpu().numpy()
-                else:
-                    thresholds = np.zeros(bin_weights_01.shape[0])
+                # Enforce gamma > 0 by folding sign(gamma) into the weight row.
+                sgn = np.sign(gamma)
+                sgn[sgn == 0] = 1.0
+                w = w * sgn.reshape(-1, 1)
+                w_01 = (w > 0).astype(np.int32)
+                T = sgn * mu - (beta * sigma) / np.abs(gamma)
+            else:
+                T = np.zeros(w.shape[0])
 
-                # Save to mem file
-                # Write weights in hex. One row per output neuron.
-                # Since weights can be large (e.g. 784 bits), we can format them as large hex strings.
-                w_filepath = mem_dir / f"layer{linear_idx}_weights.mem"
-                t_filepath = mem_dir / f"layer{linear_idx}_thresholds.mem"
+            N = w.shape[1]  # layer input width (popcount basis)
+            popcount_w = w_01.sum(axis=1)
+            meta["popcount_w_per_neuron"].append(popcount_w.tolist())
 
-                with open(w_filepath, "w") as fw:
-                    for row in bin_weights_01:
-                        # Pack row into an integer
-                        # Little endian or big endian?
-                        # Let's pack as a big integer and convert to hex
-                        # Row length e.g. 784
-                        bit_str = "".join(str(b) for b in row)
-                        # Hex string, padding to correct number of hex digits
-                        hex_len = (len(bit_str) + 3) // 4
-                        hex_val = hex(int(bit_str, 2))[2:].zfill(hex_len)
-                        fw.write(f"{hex_val}\n")
+            # Weights .mem (big-endian hex, one line per output neuron).
+            with open(mem_dir / f"layer{layer_idx}_weights.mem", "w") as f:
+                for row in w_01:
+                    f.write(_bits_to_hex(row) + "\n")
 
-                with open(t_filepath, "w") as ft:
-                    for t in thresholds:
-                        # Writing as integer since w*x is integer (or floats if preferred)
-                        # We'll write as float strings
-                        ft.write(f"{t:.4f}\n")
+            if not is_output:
+                # Hidden layer: HW computes P = popcount(XNOR(w_bit, a_bit)),
+                # z = 2*P - N, decision a' = +1 iff z > T iff P > (T + N)/2.
+                # Since P is integer: P >= floor((T+N)/2) + 1.
+                Th = np.floor((T + N) / 2.0).astype(np.int64) + 1
+                with open(mem_dir / f"layer{layer_idx}_thresholds.mem", "w") as f:
+                    for th in Th:
+                        f.write(f"{int(th)}\n")
+            else:
+                # Output layer: HW computes z_c = 2*P_c - N (true dot), then
+                # logit_c = (gamma_c/sigma_c)*z_c + (beta_c - gamma_c*mu_c/sigma_c).
+                # The scale gamma_c/sigma_c is NOT 1 in general, so it must be
+                # stored per class (a float multiply), not folded into an offset.
+                scale_c = gamma / sigma
+                off_c = beta - gamma * mu / sigma
+                with open(mem_dir / f"layer{layer_idx}_scales.mem", "w") as f:
+                    for s in scale_c:
+                        f.write(f"{float(s)}\n")
+                with open(mem_dir / f"layer{layer_idx}_offsets.mem", "w") as f:
+                    for off in off_c:
+                        f.write(f"{float(off)}\n")
 
-                print(f"Exported Layer {linear_idx}: shape {bin_weights_01.shape}")
-                linear_idx += 1
+            meta["layer_shapes"].append([w.shape[1], w.shape[0]])
+            print(f"Exported layer {layer_idx}: weights {w_01.shape}")
+            layer_idx += 1
+            i += 3 if bn is not None else 1
 
-    print("Export complete.")
+    with open(mem_dir / "export_meta.json", "w") as f:
+        json.dump(meta, f, indent=4)
+    print(f"Export complete -> {mem_dir}")
+
 
 if __name__ == "__main__":
-    export_weights()
+    export_model()
