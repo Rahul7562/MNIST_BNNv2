@@ -76,12 +76,26 @@ We want `sign(y)=+1 ⇔ y>0 ⇔ gamma*(z-mu)/sigma + beta > 0`.
 HW reads ONLY these files; no other model knowledge is needed. Changing the model
 MUST re-run export; CI fails if `export_meta.json` is stale vs the checkpoint.
 
-## 7. Hardware interface (target — detailed in Phase 2)
+## 7. Hardware interface (implemented Phase 2)
 - `bnn_top`: 784-bit input vector + `start`; outputs 4-bit `digit` + `done`.
-- Sequential layer processing, one shared popcount unit, weights/thresholds in BRAM.
-- Pure registered popcount + integer compare → **bit-exact** vs SW popcount recompute.
-- Synthesizable in Vivado (Zedboard constraints `zedboard_minimal.xdc`); simulatable
-  in Icarus Verilog.
+- Pipeline (sequential, registered): `L1 (784->256) -> L2 (256->256) -> L3 (256->10) -> argmax -> digit`.
+- One layer module (`bnn_layer`) reused for L1/L2 (hidden) and L3 (output). Each
+  layer computes `P_j = popcount(XNOR(act_in, w_j))` neuron-by-neuron, then either
+  `a'_j = (P_j >= Th_j)` (hidden) or forwards `z_j = 2*P_j - N` (output).
+- Output argmax: `logit_c = scale_c * z_c + offset_c` (per-class scale/offset from
+  `layer3_scales/offsets.hex`, read as IEEE-754 doubles via `$bitstoreal`),
+  `digit = argmax_c`. Bit-exact with the SW reference. (Phase 3 replaces the
+  `real` multiply with fixed-point/DSP for synthesis.)
+- **Bit-significance convention (critical):** all vectors are MSB-first —
+  `image_in[783]=pixel0`, `wmem[j][N-1]=weight bit0`, `act_out[Nout-1-j]=neuron j`.
+  `$readmemh`/`$fscanf` load hex MSB-first, so weights + input agree; activations
+  are explicitly written MSB-first (`act_out[Nout-1-j]`) to keep layer-to-layer
+  pairing consistent. Mixing LSB-first registers with MSB-first hex loads breaks
+  the pipeline (root cause of an early 47/51 sim failure).
+- Packed-array ports are flattened (`z_flat`) because Icarus does not reliably
+  drive array ports between modules.
+- Synthesizable in Vivado (Zedboard / `zedboard_minimal.xdc`); simulatable in
+  Icarus Verilog (`bash hw/sim/run_sim.sh`).
 
 ## 8. Target directory layout
 ```
@@ -104,6 +118,10 @@ docs/          ARCHITECTURE.md, REBUILD_PLAN.md, ...
   mathematically unavoidable for any integer threshold rule and does not affect accuracy),
   `convert_image` round-trip on a known digit.
 - **HW**: Icarus `bnn_tb` — **100% match** vs SW popcount recompute on ≥40 images
-  **including `my_digit.png`**.
+  **including `my_digit.png`** (verified: 50/50 = 100% on the SIM_COUNT=50 default
+  run; `my_digit.png` SW=HW). The expected digit is computed by
+  `scripts/prepare_hw_mem.py` from the exported `.mem` files, so the gate is
+  self-contained (does not depend on dataset labels, which may differ from the
+  model's own prediction). Build/run: `bash hw/sim/run_sim.sh`.
 - **Regression**: retrain on an augmented/perturbed dataset → re-export → HW still
   matches; artifacts stay synchronized.

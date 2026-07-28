@@ -1,3 +1,7 @@
+# Generated HW sim artifacts (produced by scripts/prepare_hw_mem.py)
+hw/mem/
+build/
+
 # Large raw datasets (download via get_dataset.py / kaggle)
 Dataset/
 
@@ -11,3 +15,6 @@ my_digit.png
 __pycache__/
 *.pyc
 .pytest_cache/
+
+# build artifacts
+mnist_bnn_v2.egg-info/
