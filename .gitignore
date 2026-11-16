@@ -18,3 +18,16 @@ __pycache__/
 
 # build artifacts
 mnist_bnn_v2.egg-info/
+
+# Node & Web artifacts (Google AI Studio)
+node_modules/
+dist/
+dist-ssr/
+*.local
+.env
+.env.local
+.env.*.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*

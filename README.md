@@ -2,13 +2,27 @@
 
 A fully-binarized fully-connected BNN (784→256→256→10) trained from scratch and
 deployed as an FPGA inference core. Goal: **>95% accuracy on unseen handwritten
-digits**, with **bit-exact** agreement between software inference and the hardware
+digits**, with **bit-exact agreement** between software inference and the hardware
 popcount path.
+
+## Google AI Studio Build Mode & Web Studio
+This repository is pre-configured for direct import into **Google AI Studio Build Mode**.
+It contains a complete interactive React + Vite web application with a digit drawing canvas,
+real-time XNOR-popcount BNN inference, and Gemini integration (`@google/genai`).
+
+### Local Web Preview
+```bash
+npm install
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) to view the interactive digit classifier.
 
 ## Repository layout
 
 | Path | Contents |
 |------|----------|
+| `package.json` | Web application dependencies & Google AI Studio container config |
+| `src/` | React + TypeScript web app (drawing canvas, BNN visualizer, Gemini integration) |
 | `sw/model/bnn.py` | BNN (per-pixel standardized input → Sign binarize; BinarySign hidden acts) |
 | `sw/training/dataset.py` | MNIST loading + per-pixel standardization |
 | `scripts/train.py` | Reproducible training (seeded) → saves checkpoint + mean/std |
@@ -41,7 +55,7 @@ python scripts/convert_image.py         # classify my_digit.png (SW + HW)
 Full walkthrough (GUI + batch) is in **`hw/vivado/README.md`**. Summary:
 
 ```bash
-bash hw/vivado/run_vivado.sh           # synth + impl + bitstream (Vivado on PATH)
+bash hw/vivado/run_vivado.sh            # synth + impl + bitstream (Vivado on PATH)
 ```
 
 This produces `bnn_top.bit` plus utilization/timing reports for the Zedboard. The
@@ -51,7 +65,7 @@ by the sim script) via `$readmemh`; no manual `.coe` is needed.
 
 ## Verification status
 
-- SW accuracy: **96.45%** • HW(popcount): **96.45%** • bit-exact HW↔SW: **100%** (10k)
+- SW accuracy: **96.45%** • HW(popcount): **96.45%** • bit-exact HW→SW: **100%** (10k)
 - Icarus sim: **100%** (≥40 MNIST images incl. `my_digit.png`)
 - CI (`.github/workflows/ci.yml`): pytest + sim + 10k gate on every push/PR
 
