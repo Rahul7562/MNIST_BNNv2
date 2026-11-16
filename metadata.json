@@ -1,6 +1,5 @@
 {
   "name": "MNIST BNN Digit Classifier & FPGA Lab",
   "description": "Interactive MNIST Binarized Neural Network (BNN) digit recognition canvas and hardware FPGA inference visualizer with Gemini AI assistance.",
-  "requestFramePermissions": [],
-  "majorCapabilities": []
+  "requestFramePermissions": []
 }
